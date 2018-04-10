@@ -1,0 +1,19 @@
+<nav>
+  <br>
+  <div class="container-fluid">
+    <div class="row justify-content-end">
+      <div class="col-4">
+        <ul class="nav">
+          <li class="nav-item li1" routerLink="/">Home</li>
+          <li class="nav-item li2" routerLink="/leaderboard">High Scores!</li>
+          <li class="nav-item li3" (click)="signup()" *ngIf="!loggedIn">Sign Up</li>
+          <li class="nav-item li1" (click)="login()" *ngIf="!loggedIn">Login</li>
+          <li class="nav-item li3" routerLink="/profile/{{userIdNumber}}" *ngIf="loggedIn">My Profile</li>
+          <li class="nav-item li1" (click)="logout()" *ngIf="loggedIn">Logout</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<br>
+<br>

@@ -1,0 +1,29 @@
+ul {
+    list-style-type: none;
+}
+
+li {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.li1 {
+    margin: 5px;
+    width: 60px;
+    padding: 3px;
+}
+
+.li2 {
+    margin: 5px;
+    width: 100px;
+    padding: 3px;
+}
+
+.li3 {
+    margin: 5px;
+    width: 80px;
+    padding: 3px;
+}
+.nav-item:hover {
+    background-color: yellow;
+}

@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="row hand" id="playerHand1">
+        <div class="col-7" id="cards1">Display Cards for hand 1</div>
+        <div class="col-1">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand1)">Hit</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand1)">Stand</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand1)">Double Down</button>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand1, hand2)">Split</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="row hand" id="playerHand2">
+          <div class="col-7" id="cards2">Display Cards for hand 2</div>
+          <div class="col-1">
+            <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand2)">Hit</button>
+          </div>
+          <div class="col-1">
+            <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand2)">Stand</button>
+          </div>
+          <div class="col-2">
+              <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand2)">Double Down</button>
+          </div>
+          <div class="col-1">
+              <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand2, hand3)">Split</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="row hand" id="playerHand3">
+        <div class="col-7" id="cards3">Display Cards for hand 3</div>
+        <div class="col-1">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand3)">Hit</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand3)">Stand</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand3)">Double Down</button>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand3, hand4)">Split</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="row hand" id="playerHand4">
+        <div class="col-7" id="cards4">Display Cards for hand 4</div>
+        <div class="col-1">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand4)">Hit</button>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand4)">Stand</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand4)">Double Down</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="row hand" id="dealerHand">
+        <div class="col-8" id="cardsD">Display Cards for Dealer</div>
+      </div>
+      <div class="col-2"></div>
+  </div>
+</div>
