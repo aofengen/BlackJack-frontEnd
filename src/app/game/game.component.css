@@ -1,3 +1,11 @@
 .hand {
     border: 2px solid black;
 }
+
+#playerHand2, #playerHand3, #playerHand4 {
+    display: none;
+}
+
+#btnDiv1 {
+    display: none;
+}

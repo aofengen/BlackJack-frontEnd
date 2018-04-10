@@ -1,98 +1,108 @@
 <div class="container-fluid">
+  <form class="row" (ngSubmit)="getBet(f)" #f="ngForm" *ngIf="!isPlayerBet">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <label for="bet">How much would you like to bet? You currently have: ${{playerMoney}}</label>
+        <div class="input-group">
+        <input type="text" class="form-control" placeholder="Bet Amount" name="amount" id="amount" ngModel>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-4"></div>
+  </form>
+  <div class="row" *ngIf="isPlayerBet">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <h3 style="text-align: center">Bet: ${{playerBet}}. Money remaining: ${{playerMoney}}</h3>
+      </div>
+    <div class="col-4"></div>
+  </div>
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand" id="playerHand1">
-        <div class="col-7" id="cards1">Display Cards for hand 1</div>
-        <div class="col-1">
-          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand1)">Hit</button>
+      <div class="row hand align-items-center" id="playerHand1">
+        <div class="col-8" id="cards1">
+          Hand 1: <b>Total: {{hand1Total}}</b>
+          <app-cards [hand]="card1.hand"></app-cards>
         </div>
-        <div class="col-1">
-          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand1)">Stand</button>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand1)">Double Down</button>
-        </div>
-        <div class="col-1">
-            <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand1, hand2)">Split</button>
+        <div class="col-4" id="btnDiv1">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(card1)">Hit</button>
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(card1)">Stand</button>
+          <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card1)">Double Down</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card1, card2)">Split</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
-  <br>
-  <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <div class="row hand" id="playerHand2">
-          <div class="col-7" id="cards2">Display Cards for hand 2</div>
-          <div class="col-1">
-            <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand2)">Hit</button>
-          </div>
-          <div class="col-1">
-            <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand2)">Stand</button>
-          </div>
-          <div class="col-2">
-              <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand2)">Double Down</button>
-          </div>
-          <div class="col-1">
-              <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand2, hand3)">Split</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-2"></div>
-  </div>
-  <br>
-  <br>
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand" id="playerHand3">
-        <div class="col-7" id="cards3">Display Cards for hand 3</div>
-        <div class="col-1">
-          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand3)">Hit</button>
+      <div class="row hand align-items-center" id="playerHand2">
+        <div class="col-8" id="cards2">
+          Hand 2: <b>Total: {{hand2Total}}</b> 
+          <app-cards [hand]="card2.hand"></app-cards>
         </div>
-        <div class="col-1">
-          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand3)">Stand</button>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand3)">Double Down</button>
-        </div>
-        <div class="col-1">
-            <button class="btn btn-md btn-warning splitBtn" (click)="splitDown(hand3, hand4)">Split</button>
+        <div class="col-4" id="btnDiv2">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(card2)">Hit</button>
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(card2)">Stand</button>
+          <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card2)">Double Down</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card2, card3)">Split</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
-  <br>
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand" id="playerHand4">
-        <div class="col-7" id="cards4">Display Cards for hand 4</div>
-        <div class="col-1">
-          <button class="btn btn-md btn-primary hitBtn" (click)="hit(hand4)">Hit</button>
+      <div class="row hand align-items-center" id="playerHand3">    
+        <div class="col-8" id="cards3">
+          Hand 3: <b>Total: {{hand3Total}}</b>
+          <app-cards [hand]="card3.hand"></app-cards>
         </div>
-        <div class="col-1">
-          <button class="btn btn-md btn-secondary standBtn" (click)="stand(hand4)">Stand</button>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(hand4)">Double Down</button>
+        <div class="col-4" id="btnDiv3">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(card3)">Hit</button>
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(card3)">Stand</button>
+          <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card3)">Double Down</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card3, card4)">Split</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="row hand align-items-center" id="playerHand4">
+        <div class="col-8" id="cards4">
+          Hand 4: <b>Total: {{hand4Total}}</b>
+          <app-cards [hand]="card4.hand"></app-cards>
+        </div>
+        <div class="col-4" id="btnDiv4">
+          <button class="btn btn-md btn-primary hitBtn" (click)="hit(card4)">Hit</button>
+          <button class="btn btn-md btn-secondary standBtn" (click)="stand(card4)">Stand</button>
+          <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card4)">Double Down</button>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
   <br>
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand" id="dealerHand">
-        <div class="col-8" id="cardsD">Display Cards for Dealer</div>
+      <div class="row hand align-items-center" id="dealerHand">
+        <div class="col-8" id="cardsD">
+          Dealer's Hand: <b>Total: {{dealerTotal}}</b>
+          <app-cards [hand]="dealer.hand"></app-cards>
+        </div>
       </div>
       <div class="col-2"></div>
   </div>
