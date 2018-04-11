@@ -2,10 +2,15 @@
     border: 2px solid black;
 }
 
-#playerHand2, #playerHand3, #playerHand4 {
+/* #btnDiv2, #btnDiv3, #btnDiv4 {
+    display: inline-block;
+} */
+
+/* #playerHand2, #playerHand3, #playerHand4 {
     display: none;
 }
 
-#btnDiv1 {
+#btnDiv1, #btnDiv2, #btnDiv3, #btnDiv4 {
     display: none;
-}
+} */
+

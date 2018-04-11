@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { CardsComponent } from './cards/cards.component';
 
+import { GameService } from './services/game.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { CardsComponent } from './cards/cards.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    GameService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
