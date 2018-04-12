@@ -1,5 +1,6 @@
 <ul>
   <li *ngFor="let x of (cards)" class="cards">
-    <img src="../assets/{{x.suit}}S/{{x.value}}{{x.suit}}S.png" alt="{{x}}">
+    <img src="../assets/{{x.suit}}S/{{x.value}}{{x.suit}}S.png" alt="{{x}}" *ngIf="!x.doubleDown">
+    <img src="../assets/cardBack.jpg" alt="{{x}}" *ngIf="x.doubleDown">
   </li>
 </ul>
