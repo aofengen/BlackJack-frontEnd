@@ -31,18 +31,23 @@
           Hand 1: <b>Bet: ${{card1.bet}}. Total: {{card1.total}}. {{card1.result}}</b>
           <app-cards [hand]="card1.hand"></app-cards>
         </div>
-        <div class="col-4" id="btnDiv1" *ngIf="!card1.stand && !card1.blackjack">
+        <div class="col-4" id="btnDiv1" *ngIf="!card1.stand && !card1.blackjack && !card1.splitAces">
           <button class="btn btn-md btn-primary hitBtn" (click)="hit(card1)">Hit</button>
           <button class="btn btn-md btn-secondary standBtn" (click)="stand(card1)">Stand</button>
           <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card1)" *ngIf="card1.hand.length == 2">Double Down</button>
-          <button class="btn btn-md btn-warning splitBtn" (click)="split(card1, card2)" *ngIf="card1.hand.length == 2 && card1.hand[0].value == card1.hand[1].value">Split</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card1)" *ngIf="card1.hand.length == 2 && card1.hand[0].value == card1.hand[1].value">Split</button>
+        </div>
+        <div class="col-4" *ngIf="!card1.stand && !card1.blackjack && card1.splitAces">
+          <h4>Split again?</h4>
+          <button type="button" (click)="split(card1)" class="btn btn-success">Yes</button>
+          <button type="button" (click)="stand(card1)" class="btn btn-danger">No</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
-  <div class="row" *ngIf="card1.split">
+  <div class="row" *ngIf="card2.split">
     <div class="col-2"></div>
     <div class="col-8">
       <div class="row hand align-items-center" id="playerHand2" >
@@ -50,45 +55,55 @@
           Hand 2: <b>Bet: ${{card2.bet}} Total: {{card2.total}}. {{card2.result}}</b> 
           <app-cards [hand]="card2.hand"></app-cards>
         </div>
-        <div class="col-4" id="btnDiv1" *ngIf="card1.stand && !card2.blackjack">
+        <div class="col-4" id="btnDiv1" *ngIf="card1.stand && !card2.blackjack && !card2.splitAces">
           <button class="btn btn-md btn-primary hitBtn" (click)="hit(card2)">Hit</button>
           <button class="btn btn-md btn-secondary standBtn" (click)="stand(card2)">Stand</button>
           <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card2)" *ngIf="card2.hand.length == 2">Double Down</button>
-          <button class="btn btn-md btn-warning splitBtn" (click)="split(card2, card3)" *ngIf="card2.hand.length == 2 && card2.hand[0].value == card2.hand[1].value">Split</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card2)" *ngIf="card2.hand.length == 2 && card2.hand[0].value == card2.hand[1].value">Split</button>
+        </div>
+        <div class="col-4" *ngIf="!card2.stand && !card2.blackjack && card2.splitAces && card1.stand">
+          <h4>Split again?</h4>
+          <button type="button" (click)="split(card2)" class="btn btn-success">Yes</button>
+          <button type="button" (click)="stand(card2)" class="btn btn-danger">No</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
-  <div class="row">
+  <div class="row" *ngIf="card3.split">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand align-items-center" id="playerHand3" *ngIf="card2.split">    
+      <div class="row hand align-items-center" id="playerHand3">    
         <div class="col-8" id="cards3">
           Hand 3: <b>Bet: ${{card3.bet}} Total: {{card3.total}}. {{card3.result}}</b>
           <app-cards [hand]="card3.hand"></app-cards>
         </div>
-        <div class="col-4" id="btnDiv1" *ngIf="card2.stand && !card3.blackjack">
+        <div class="col-4" id="btnDiv1" *ngIf="card2.stand && !card3.blackjack && !card3.splitAces">
           <button class="btn btn-md btn-primary hitBtn" (click)="hit(card3)">Hit</button>
           <button class="btn btn-md btn-secondary standBtn" (click)="stand(card3)">Stand</button>
           <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card3)" *ngIf="card3.hand.length == 2">Double Down</button>
-          <button class="btn btn-md btn-warning splitBtn" (click)="split(card3, card4)" *ngIf="card3.hand.length == 2 && card3.hand[0].value == card3.hand[1].value">Split</button>
+          <button class="btn btn-md btn-warning splitBtn" (click)="split(card3)" *ngIf="card4.hand.length != 0 && card3.hand.length == 2 && card3.hand[0].value == card3.hand[1].value">Split</button>
+        </div>
+        <div class="col-4" *ngIf="!card3.stand && !card3.blackjack && card3.splitAces && card2.stand">
+          <h4>Split again?</h4>
+          <button type="button" (click)="split(card3)" class="btn btn-success">Yes</button>
+          <button type="button" (click)="stand(card3)" class="btn btn-danger">No</button>
         </div>
       </div>
     </div>
     <div class="col-2"></div>
   </div>
   <br>
-  <div class="row">
+  <div class="row" *ngIf="card4.split">
     <div class="col-2"></div>
     <div class="col-8">
-      <div class="row hand align-items-center" id="playerHand4" *ngIf="card3.split">
+      <div class="row hand align-items-center" id="playerHand4">
         <div class="col-8" id="cards4">
           Hand 4: <b>Bet: ${{card4.bet}} Total: {{card4.total}}. {{card4.result}}</b>
           <app-cards [hand]="card4.hand"></app-cards>
         </div>
-        <div class="col-4" id="btnDiv1" *ngIf="card3.stand && !card4.blackjack">
+        <div class="col-4" id="btnDiv1" *ngIf="card3.stand && !card4.blackjack && !card4.splitAces">
           <button class="btn btn-md btn-primary hitBtn" (click)="hit(card4)">Hit</button>
           <button class="btn btn-md btn-secondary standBtn" (click)="stand(card4)">Stand</button>
           <button class="btn btn-md btn-success doubleBtn" (click)="doubleDown(card4)" *ngIf="card4.hand.length == 2">Double Down</button>

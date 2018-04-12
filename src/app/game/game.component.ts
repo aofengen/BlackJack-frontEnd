@@ -31,6 +31,7 @@ export class GameComponent implements OnInit {
     hand: [],
     result: "",
     split: false,
+    splitAces: false,
     stand: false,
     total: 0
   }
@@ -44,6 +45,7 @@ export class GameComponent implements OnInit {
     hand: [],
     result: "",
     split: false,
+    splitAces: false,
     stand: false,
     total: 0
     }
@@ -57,6 +59,7 @@ export class GameComponent implements OnInit {
     hand: [],
     result: "",
     split: false,
+    splitAces: false,
     stand: false,
     total: 0
   }
@@ -70,6 +73,7 @@ export class GameComponent implements OnInit {
     hand: [],
     result: "",
     split: false,
+    splitAces: false,
     stand: false,
     total: 0
   }
@@ -130,7 +134,6 @@ export class GameComponent implements OnInit {
   }
 
   hit(x) {
-    console.log("dealer draws a card");
       this.gs.dealCard(x, this.shoe);
       this.gs.getHandValue(x.hand);
       this.gs.checkBust(x);
@@ -153,8 +156,15 @@ export class GameComponent implements OnInit {
           x.stand = true;
           break;
         case this.card3:
-          x.stand = true;
-          break;
+          if(this.card3.splitAces != true) {
+            x.stand = true;
+            break;
+          } else {
+            x.stand = true;
+            this.card4.stand = true;
+            this.dealerTurn(this.dealer);
+            break;
+        }
         case this.card4:
           x.stand = true;
           this.dealerTurn(this.dealer);
@@ -172,7 +182,7 @@ export class GameComponent implements OnInit {
   doubleDown(x) {
     if (x.hand.length > 2) {
       alert("You cannot double down after you take a card.");
-    } else if (this.playerMoneyAvailable < x.bet * 2) {
+    } else if (this.playerMoneyAvailable < x.bet) {
       alert("You do not have enough money to double down."); 
     } else {
       console.log("Doubling Down on " + x.deck + ". Card will be hidden until after dealer's turn has finished.");
@@ -185,33 +195,21 @@ export class GameComponent implements OnInit {
     }
   }
 
-  split(x, y) {
-    console.log("Splitting " + x.deck + " into " + x.deck + " and " + y.deck);
+  split(x) {
+    this.pHands = [this.card1, this.card2, this.card3, this.card4];
+
     if (this.playerMoneyAvailable < x.bet * 2) {
       alert("You do not have enough money to split.");
     } else {
+      let y = this.gs.findBlankHands(this.pHands);
+      console.log(y);
       this.playerBet += x.bet;
       this.playerMoneyAvailable -= x.bet;
-      
-      switch(x.deck){
-        case 'hand 1':
-        x.split = true;
-        y.bet = x.bet;
-        this.gs.splitHands(x, y, this.shoe);
-        break;
-      case 'hand 2':
-        x.split = true;
-        y.bet = x.bet;
-        this.gs.splitHands(x, y, this.shoe);
-        break;
-      case 'hand 3':
-        x.split = true;
-        y.bet = x.bet;
-        this.gs.splitHands(x, y, this.shoe);
-        break;
-      default:
-        break;
-      }
+    
+      x.split = true;
+      y.split = true;
+      y.bet = x.bet;
+      this.gs.splitHands(x, y, this.shoe);
     }
   }
 

@@ -9,6 +9,7 @@ export class GameService {
         x.hand = [];
         x.result = "";
         x.split = false;
+        x.splitAces = false;
         x.stand = false;
         x.total = 0;
 
@@ -46,10 +47,10 @@ export class GameService {
     }
 
     startHand(x, d, shoe) {
-        this.dealCard(x, shoe);
+        // this.dealCard(x, shoe);
         this.dealCard(d, shoe);
 
-        this.dealCard(x, shoe);
+        // this.dealCard(x, shoe);
         this.dealCard(d, shoe);
     }
 
@@ -114,12 +115,28 @@ export class GameService {
         return handValue;
       }
 
+    findBlankHands(p) {
+        let y;
+        for (let i = 0; i < p.length; i++) {
+            if (p[i].hand.length == 0) {
+                y = p[i];
+                break;
+            }
+        }
+        return y;
+    }
+
     splitHands(x, y, shoe) {
         y.hand.push(x.hand[1]);
         x.hand.splice(1);
 
         this.dealCard(x, shoe);
         this.dealCard(y, shoe);
+
+        if (x.hand[0].value == "ACE" && y.hand[0].value == "ACE") {
+            x.splitAces = true;
+            y.splitAces = true;
+        }
     }
 
     checkBust(x) {
