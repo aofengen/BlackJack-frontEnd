@@ -110,9 +110,12 @@ export class GameComponent implements OnInit {
 
   getBet(form: NgForm) {
     this.playerMoneyAvailable = this.playerMoney;
-
-    this.playerBet = form.value.amount;
-    if (this.playerBet > this.playerMoney) {
+    this.playerBet = Number(form.value.amount);
+    if (isNaN(this.playerBet)) {
+      alert("Please enter a number.");
+    } else if (this.playerBet <= 0) {
+      alert("You must bet at least $1!");
+    } else if (this.playerBet > this.playerMoney) {
       alert("You can't bet more than you have!");
     } else {
       this.card1.bet = this.playerBet;
