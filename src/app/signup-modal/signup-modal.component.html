@@ -1,0 +1,25 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button class="close" type="button" (click)="activeModal.close('Close click')" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">Sign Up</h4>
+	</div>
+	<form (ngSubmit)="onSignup(f)" #f="ngForm" class="modal-body">
+	<!-->NGForm takes all inputs with the ngModel attribute and bundles them together
+		into the ngForm object, which is then passed to the TS file <-->
+		<div class="form-group">
+			<label>Name:</label>
+			<input type="text" name="studentName" id="studentName" ngModel class="form-control" required />
+      <label>Email:</label>
+      <input type="text" id="email" name="email" ngModel class="form-control" required email />
+      <label>Username:</label>
+      <input type="text" id="username" name="username" ngModel class="form-control" required />
+      <label>Password:</label>
+      <input type="password" id="password" name="password" ngModel class="form-control" required password/>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-default" type="button" (click)="activeModal.close('Close click')">Cancel</button>
+			<button type="submit" class="btn btn-primary" [disabled]="!f.valid">Signup</button>
+		</div>
+	</form>
+</div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignupModalComponent } from '../signup-modal/signup-modal.component';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ms: NgbModal) { }
 
     loggedIn = false;
     userIdNumber: number;
@@ -16,13 +19,12 @@ export class HeaderComponent implements OnInit {
   }
 
   signup() {
-    this.loggedIn = true;
-    this.userIdNumber = 1;
+    this.ms.open(SignupModalComponent);
   }
 
   login() {
     this.loggedIn = true;
-    this.userIdNumber = 1;
+    this.ms.open(LoginModalComponent);
   }
 
   logout() {
