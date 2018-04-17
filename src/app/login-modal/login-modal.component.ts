@@ -12,6 +12,9 @@ export class LoginModalComponent implements OnInit {
 
   constructor(public as: AuthService, public activeModal: NgbActiveModal) { }
 
+    loggedIn = false;
+    name: string;
+    
   ngOnInit() {
   }
 

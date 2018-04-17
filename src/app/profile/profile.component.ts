@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';  
 
 @Component({
   selector: 'app-profile',
@@ -8,9 +9,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(public as: AuthService) { }
+  loggedIn = false;
+  name: string;
 
   ngOnInit() {
+    this.loggedIn = this.as.isAuthenticated();
+    this.name = this.as.getName();
   }
 
 }

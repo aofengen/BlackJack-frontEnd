@@ -7,6 +7,8 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class AuthService {
     token: string;
+    name: string;
+    userIdNumber: number;
     private userInfo: Users[] = [];
     
     constructor(public activeModal: NgbActiveModal, private router: Router) {}
@@ -33,6 +35,8 @@ export class AuthService {
         .then((data) => {
             console.log(data);
             this.token = data.token;
+            this.name = data.name;
+            this.userIdNumber = data.id;
             this.router.navigate([`/profile/${data.id}`]); 
         })
         .catch((error) => {
@@ -55,7 +59,10 @@ export class AuthService {
   		.then((data) =>{ 
             if (data.token) {
                 console.log(data);
-                this.token = data.token
+                localStorage.setItem("token", data.token);
+                this.token = data.token;
+                this.name = data.name;
+                this.userIdNumber = data.id;
                 this.router.navigate([`/profile/${data.id}`]); 
             }
             
@@ -68,5 +75,13 @@ export class AuthService {
 
     isAuthenticated() {
         return this.token != null;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getUserIdNumber() { 
+        return this.userIdNumber;
     }
 }
