@@ -18,9 +18,8 @@ export class AuthService {
                 username: username,
                 password: password
           }
-          console.log(newUser);
 
-        fetch('https://blackjack-java-api.herokuapp.com/signup', {
+        fetch(/*'https://blackjack-java-api.herokuapp.com/signup'*/ 'http://localhost:8080/signup', {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -33,8 +32,8 @@ export class AuthService {
         })
         .then((data) => {
             console.log(data);
-            // this.token = data.token;
-        //     this.router.navigate(['/profile/{{data.id}}']); 
+            this.token = data.token;
+            this.router.navigate([`/profile/${data.id}`]); 
         })
         .catch((error) => {
             console.log(error);
@@ -43,7 +42,7 @@ export class AuthService {
 
     loginUser(email:string, password: string) {
             let userData = {email: email, password: password}
-		fetch('https://blackjack-java-api.herokuapp.com/login', {
+		fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/login', {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -51,12 +50,18 @@ export class AuthService {
             body: JSON.stringify(userData)
         })
   	    .then((response) => {	
-                return response.json();
+            return response.json();
         })
   		.then((data) =>{ 
-              console.log(data);
-            // this.token = data.token
-		    // this.router.navigate(['/profile/{{data.id}}']);
+            if (data.token) {
+                console.log(data);
+                this.token = data.token
+                this.router.navigate([`/profile/${data.id}`]); 
+            }
+            
+            if (data.error) {
+                console.log(data.error);
+            }
         })
     	.catch(error => console.log(error));
 	}

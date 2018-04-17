@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
 
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
@@ -8,8 +9,8 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const routes = [
     { path: '', component: HomeComponent },
-    { path: 'game', component: GameComponent },
     { path: 'leaderboard', component: LeaderboardComponent },
-    { path: 'profile/:id', component: ProfileComponent },
+    { path: 'game', component: GameComponent, canActivate: [AuthGuard] },
+    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/'}
 ]
