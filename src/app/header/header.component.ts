@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     if (localStorage.getItem("token")) {
       this.token = localStorage.getItem("token");
       this.userIdNumber = this.as.getUserIdNumber();
+      this.name = this.as.getName();
     }
   }
 

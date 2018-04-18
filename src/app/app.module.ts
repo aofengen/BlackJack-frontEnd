@@ -19,6 +19,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { GameService } from './services/game.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [

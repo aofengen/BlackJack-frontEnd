@@ -8,8 +8,10 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class AuthService {
     token: string;
     name: string;
+    username: string;
+    email: string;
     userIdNumber: number;
-    private userInfo: Users[] = [];
+    // private userInfo: Users[] = [];
     
     constructor(public activeModal: NgbActiveModal, private router: Router) {}
 
@@ -36,11 +38,13 @@ export class AuthService {
             console.log(data);
             this.token = data.token;
             this.name = data.name;
+            this.username = data.username;
+            this.email = data.email;
             this.userIdNumber = data.id;
             this.router.navigate([`/profile/${data.id}`]); 
         })
         .catch((error) => {
-            console.log(error);
+            alert(error);
         });
     }
 
@@ -62,15 +66,17 @@ export class AuthService {
                 localStorage.setItem("token", data.token);
                 this.token = data.token;
                 this.name = data.name;
+                this.username = data.username;
+                this.email = data.email;
                 this.userIdNumber = data.id;
                 this.router.navigate([`/profile/${data.id}`]); 
             }
             
             if (data.error) {
-                console.log(data.error);
+                alert(data.error);
             }
         })
-    	.catch(error => console.log(error));
+    	.catch(error => alert(error));
 	}
 
     isAuthenticated() {
@@ -81,7 +87,15 @@ export class AuthService {
         return this.name;
     }
 
+    getUsername() {
+        return this.username;
+    }
+
     getUserIdNumber() { 
         return this.userIdNumber;
+    }
+
+    getEmail() {
+        return this.email;
     }
 }
