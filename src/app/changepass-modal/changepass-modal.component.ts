@@ -17,24 +17,18 @@ export class ChangepassModalComponent implements OnInit{
   username: string;
   email: string;
 
-  ngOnInit() {
-    this.name = this.as.getName();
-    this.username = this.as.getUsername();
-    this.email = this.as.getEmail();
-    console.log(this.name + " " + this.username + " " + this.email);
-
-    $('#name').val(this.name);
-    $('#username').val(this.username);
-    $('#email').val(this.email);
-  }
+  ngOnInit() {}
 
   onSubmit(form: NgForm) {
-    let newName = form.value.name;
-    let newUsername = form.value.username;
-    let newEmail = form.value.email;
-    let pass = form.value.password;
+    let oldPass = form.value.oldPass;
+    let newPass = form.value.newPass;
+    let confirmPass = form.value.confirmPass;
+    if(newPass != confirmPass) {
+      alert("New Password and Confirm Password do not match!");
+    } else {
+      this.as.changeUserPassword(oldPass, newPass, confirmPass);
+    }
 
-    this.as.changeUserInfo(newName, newUsername, newEmail, pass);
   }
 
 }

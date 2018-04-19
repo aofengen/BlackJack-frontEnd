@@ -8,13 +8,13 @@
     <h5>Enter your password</h5>
     <div class="form-group">
       <label>Old Password:</label>
-      <input type="password" class="form-control" name="oldPassword" ngModel required password/>
+      <input type="password" class="form-control" name="oldPass" minlength="8" ngModel required password/>
       <br>
       <label>New Password:</label>
-      <input type="password" class="form-control" name="newPassword" ngModel required password/>
+      <input type="password" class="form-control" name="newPass" minlength="8" ngModel required password/>
       <br>
       <label>Confirm Password:</label>
-      <input type="password" class="form-control" name="confirmPassword" ngModel required password/>
+      <input type="password" class="form-control" name="confirmPass" minlength="8" ngModel required password/>
     </div>	
     <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="activeModal.close('Close click')">Cancel</button>

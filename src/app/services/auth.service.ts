@@ -23,7 +23,7 @@ export class AuthService {
                 password: password
           }
 
-        fetch(/*'https://blackjack-java-api.herokuapp.com/signup'*/ 'http://localhost:8080/signup', {
+        fetch('https://blackjack-java-api.herokuapp.com/signup' /*'http://localhost:8080/signup'*/, {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -50,7 +50,7 @@ export class AuthService {
 
     loginUser(email:string, password: string) {
         let userData = {email: email, password: password}
-		fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/login', {
+		fetch('https://blackjack-java-api.herokuapp.com/login' /*'http://localhost:8080/login'*/, {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -62,7 +62,6 @@ export class AuthService {
         })
   		.then((data) =>{ 
             if (data.token) {
-                console.log(data);
                 localStorage.setItem("token", data.token);
                 this.token = data.token;
                 this.name = data.name;
@@ -79,21 +78,39 @@ export class AuthService {
     	.catch(error => alert(error));
     }
     
-    changeUserInfo(name:string, username:string, newEmail:string, password:string) {
-        let oldEmail = this.getEmail();
-        let userIdNumber = this.getUserIdNumber();
-        console.log(oldEmail + " " + userIdNumber);
+    changeUserInfo(newName:string, newUsername:string, newEmail:string, password:string) {
         let userData = {
-            name: name,
-            username: username,
-            oldEmail: oldEmail,
+            newName: newName,
+            newUsername: newUsername,
             newEmail: newEmail,
             password: password,
-            userIdNumber: userIdNumber,
+            id: this.userIdNumber,
             token: localStorage.getItem("token")
         }
-        console.log(userData);
-        fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/changeInfo', {
+        fetch('https://blackjack-java-api.herokuapp.com/changeInfo' /*'http://localhost:8080/changeInfo'*/, {
+            method: "POST",
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(userData)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+    }
+
+    changeUserPassword(oldPass:string, newPass:string, confirmPass:string) {
+        let userData = {
+            oldPass: oldPass,
+            newPass: newPass,
+            confirmPass: confirmPass,
+            id: this.userIdNumber,
+            token: localStorage.getItem("token")
+        }
+        fetch('https://blackjack-java-api.herokuapp.com/changePass' /*'http://localhost:8080/changePassword'*/, {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/json'

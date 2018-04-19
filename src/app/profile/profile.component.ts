@@ -2,8 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmpassModalComponent } from '../confirmpass-modal/confirmpass-modal.component';
-import { AuthService } from '../services/auth.service';
+import { ChangepassModalComponent } from '../changepass-modal/changepass-modal.component';
 
+import { AuthService } from '../services/auth.service';
 import * as $ from 'jquery';
 
 @Component({
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword() {
-    alert("Under Construction");
+    this.ms.open(ChangepassModalComponent);
   }
 
 }
