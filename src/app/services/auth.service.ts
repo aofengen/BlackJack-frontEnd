@@ -49,7 +49,7 @@ export class AuthService {
     }
 
     loginUser(email:string, password: string) {
-            let userData = {email: email, password: password}
+        let userData = {email: email, password: password}
 		fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/login', {
             method: "POST",
             headers: new Headers ({
@@ -77,7 +77,36 @@ export class AuthService {
             }
         })
     	.catch(error => alert(error));
-	}
+    }
+    
+    changeUserInfo(name:string, username:string, newEmail:string, password:string) {
+        let oldEmail = this.getEmail();
+        let userIdNumber = this.getUserIdNumber();
+        console.log(oldEmail + " " + userIdNumber);
+        let userData = {
+            name: name,
+            username: username,
+            oldEmail: oldEmail,
+            newEmail: newEmail,
+            password: password,
+            userIdNumber: userIdNumber,
+            token: localStorage.getItem("token")
+        }
+        console.log(userData);
+        fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/changeInfo', {
+            method: "POST",
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(userData)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+    }
 
     isAuthenticated() {
         return this.token != null;

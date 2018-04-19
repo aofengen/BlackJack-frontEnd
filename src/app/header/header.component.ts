@@ -38,6 +38,8 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
 
   logout() {
     this.token = null;
+    this.name = null;
+    this.userIdNumber = null;
     localStorage.removeItem("token");
     this.router.navigate(['/']);
   }

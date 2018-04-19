@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmpassModalComponent } from '../confirmpass-modal/confirmpass-modal.component';
 import { AuthService } from '../services/auth.service';
 
 import * as $ from 'jquery';
@@ -11,7 +13,7 @@ import * as $ from 'jquery';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public as: AuthService) { }
+  constructor(public as: AuthService, public ms: NgbModal) { }
   loggedIn = false;
   name: string;
   username: string;
@@ -19,25 +21,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.as.isAuthenticated();
-    this.name = this.as.getName();
-    this.username = this.as.getUsername();
-    this.email = this.as.getEmail();
 
-    $('#name').val(this.name);
-    $('#username').val(this.username);
-    $('#email').val(this.email);
+    $('#name').val(this.as.getName());
+    $('#username').val(this.as.getUsername());
+    $('#email').val(this.as.getEmail());
   }
 
-  changeName() {
-    alert("Under Construction");
-  }
-
-  changeUsername() {
-    alert("Under Construction");
-  }
-
-  changeEmail() {
-    alert("Under Construction");
+  changeInfo() {
+    this.ms.open(ConfirmpassModalComponent);
   }
 
   changePassword() {

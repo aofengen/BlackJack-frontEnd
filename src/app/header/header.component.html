@@ -1,7 +1,7 @@
 <nav>
   <br>
   <div class="container-fluid">
-    <h2>Hello, {{name}}</h2>
+    <h2 *ngIf="name">Hello, {{name}}</h2>
     <div class="row justify-content-end">
       <div class="col-4">
         <ul class="nav">
@@ -17,4 +17,4 @@
   </div>
 </nav>
 <br>
-<br>
+<hr>

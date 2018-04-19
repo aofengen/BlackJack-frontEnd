@@ -1,0 +1,11 @@
+input.ng-invalid.ng-touched {
+	border: 1px solid red;
+}
+
+.btn[disabled] {
+	cursor: not-allowed;
+}
+
+h6 {
+	text-align: center;
+}

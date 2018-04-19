@@ -15,6 +15,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { CardsComponent } from './cards/cards.component';
 import { SignupModalComponent } from './signup-modal/signup-modal.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
+import { ConfirmpassModalComponent } from './confirmpass-modal/confirmpass-modal.component';
+import { ChangepassModalComponent } from './changepass-modal/changepass-modal.component';
 
 import { GameService } from './services/game.service';
 import { AuthService } from './services/auth.service';
@@ -31,7 +33,9 @@ import * as $ from 'jquery';
     LeaderboardComponent,
     CardsComponent,
     SignupModalComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    ConfirmpassModalComponent,
+    ChangepassModalComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import * as $ from 'jquery';
   ],
   entryComponents: [
     SignupModalComponent,
-    LoginModalComponent
+    LoginModalComponent,
+    ConfirmpassModalComponent,
+    ChangepassModalComponent
   ],
   bootstrap: [AppComponent]
 })
