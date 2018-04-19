@@ -13,6 +13,9 @@ export class SignupModalComponent implements OnInit {
 
   constructor(public as: AuthService, public activeModal: NgbActiveModal, private router: Router) { }
 
+  loggedIn = false;
+  name: string;
+
   ngOnInit() {
   }
 
@@ -27,14 +30,9 @@ export class SignupModalComponent implements OnInit {
       //form validation to require no form is null
       alert("Please enter all fields!");
     } else {
-      if (password.length < 6) {
-        //firebase.auth() requires passwords to be at least 6 characters
-        alert("Please enter a longer password! Must be at least 6 characters.");
-      } else {
-        this.as.newUser(name, email, username, password);
-        //access newUser function from AuthService file using parameters in parens
-        this.activeModal.close('Close click');
-      }
+      this.as.newUser(name, email, username, password);
+      //access newUser function from AuthService file using parameters in parens
+      this.activeModal.close('Close click');
     }
   }
 

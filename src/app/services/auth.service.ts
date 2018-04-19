@@ -35,7 +35,7 @@ export class AuthService {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
+            localStorage.setItem("token", data.token);
             this.token = data.token;
             this.name = data.name;
             this.username = data.username;

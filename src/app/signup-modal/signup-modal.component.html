@@ -15,7 +15,7 @@
       <label>Username:</label>
       <input type="text" id="username" name="username" ngModel class="form-control" required />
       <label>Password:</label>
-      <input type="password" id="password" name="password" ngModel class="form-control" required password/>
+      <input type="password" id="password" name="password" ngModel class="form-control" minlength="8" required password/>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-default" type="button" (click)="activeModal.close('Close click')">Cancel</button>
