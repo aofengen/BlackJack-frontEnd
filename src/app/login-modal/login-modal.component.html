@@ -10,7 +10,7 @@
       <input class="form-control" name="email" ngModel required email/>
       <br>
       <label>Password:</label>
-      <input type="password" class="form-control" name="password" ngModel required password/>
+      <input type="password" class="form-control" name="password" minlength="8" ngModel required password/>
 		</div>	
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" (click)="activeModal.close('Close click')">Cancel</button>

@@ -13,12 +13,15 @@ import * as $ from 'jquery';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @Input() id: number;
 
-  constructor(public as: AuthService, public ms: NgbModal) { }
   loggedIn = false;
   name: string;
   username: string;
   email: string;
+
+  constructor(private as: AuthService, private ms: NgbModal, private router: Router, private ar: ActivatedRoute) { }
+  
 
   ngOnInit() {
     this.loggedIn = this.as.isAuthenticated();
@@ -34,6 +37,16 @@ export class ProfileComponent implements OnInit {
 
   changePassword() {
     this.ms.open(ChangepassModalComponent);
+  }
+
+  getStats() {
+    this.ar.params
+      .subscribe(
+          (params: Params) => {
+			  this.id = +params['id'];
+      }) 
+    console.log(this.id);
+    this.router.navigate([`/stats/${this.id}`]);
   }
 
 }

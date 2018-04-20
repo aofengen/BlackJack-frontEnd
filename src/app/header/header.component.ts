@@ -4,6 +4,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupModalComponent } from '../signup-modal/signup-modal.component';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../services/auth.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit, AfterContentChecked {
 
-  constructor(private ms: NgbModal, private as: AuthService, private router: Router) { }
+  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private gs: GameService) { }
 
     token: string;
     name: string;
@@ -40,7 +41,8 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.token = null;
     this.name = null;
     this.userIdNumber = null;
-    localStorage.removeItem("token");
+    this.gs.saveStats();
+    localStorage.clear();
     this.router.navigate(['/']);
   }
 }

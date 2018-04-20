@@ -11,14 +11,12 @@ export class GameComponent implements OnInit {
 
 
   constructor(public gs: GameService) { }
+  sessionHandsPlayed: number;
+  sessionHandsWon: number;
+  sessionHighMoney: number;
+  sessionBlackjacks: number;
 
-  ngOnInit() {
-    this.playerMoney = 100.00;
-    this.playerBet = 0;
-    this.isPlayerBet = false;
-  }
-
-  shoe = this.gs.getMainDeck();
+  shoe = [];
 
   pHands = [];
 
@@ -99,6 +97,37 @@ export class GameComponent implements OnInit {
   isPlayerBet = false;
   handOver = false;
   outOfMoney = false;
+
+  ngOnInit() {
+    if (Number(localStorage.getItem("money")) > 0) {
+      this.playerMoney = Number(localStorage.getItem("money"));
+      this.sessionHandsWon = Number(localStorage.getItem("handsWon"));
+      this.sessionHandsPlayed = Number(localStorage.getItem("handsPlayed"));
+      this.sessionBlackjacks = Number(localStorage.getItem("blackjacks"));
+      this.sessionHighMoney = Number(localStorage.getItem("highMoney"));      
+
+    } else {
+      this.playerMoney = 100.00;
+      this.sessionHandsWon = 0;
+      this.sessionHandsPlayed = 0;
+      this.sessionBlackjacks = 0;
+      this.sessionHighMoney = this.playerMoney;      
+      
+      localStorage.setItem("money", this.playerMoney.toString());
+      localStorage.setItem("handsWon", this.sessionHandsWon.toString());
+      localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
+      localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
+      localStorage.setItem("highMoney", this.sessionHighMoney.toString());
+    }
+    
+    
+
+
+
+    this.shoe = this.gs.getMainDeck();
+    this.playerBet = 0;
+    this.isPlayerBet = false;
+  }
 
   reset() {
     this.handOver = false;
@@ -198,7 +227,7 @@ export class GameComponent implements OnInit {
   split(x) {
     this.pHands = [this.card1, this.card2, this.card3, this.card4];
 
-    if (this.playerMoneyAvailable < x.bet * 2) {
+    if (this.playerMoneyAvailable < x.bet) {
       alert("You do not have enough money to split.");
     } else {
       let y = this.gs.findBlankHands(this.pHands);
@@ -249,22 +278,27 @@ export class GameComponent implements OnInit {
       if (p[i].result == "") {
         break;
       } else if (p[i].bust == true) {
+        this.stats("not win");
         this.playerMoney -= p[i].bet;
       } else {
         switch (p[i].result) {
           case "BLACKJACK!!!":
             p[i].result = "BLACKJACK!!!";
+            this.stats("blackjack");
             this.playerMoney += p[i].bet * 1.5;
             break;
           case "Winner!!!":
             p[i].result = "You Win!";
+            this.stats("win");
             this.playerMoney += p[i].bet;
             break;
           case "Push!":
             p[i].result = "Push.";
+            this.stats("not win");
             break;
           case "Loser..." || p[i].bust == true:
             p[i].result = "You lost...";
+            this.stats("not win");
             this.playerMoney -= p[i].bet;
             break;
           default:
@@ -273,10 +307,44 @@ export class GameComponent implements OnInit {
       }
     }
     if (this.playerMoney <= 0) {
+      this.updateStats();
+      this.gs.saveStats();
       this.outOfMoney = true;
     } else {
     this.handOver = true;
+    if (this.playerMoney > Number(localStorage.getItem("highMoney"))) {
+      localStorage.setItem("highMoney", this.playerMoney.toString());
+    }
+    this.updateStats();
     }
   }
 
+  stats(result: string) {
+    switch (result) {
+      case "blackjack":
+        this.sessionBlackjacks += 1;
+        this.sessionHandsWon += 1;
+        this.sessionHandsPlayed += 1;
+        break;
+      case "win":
+        this.sessionHandsWon += 1;
+        this.sessionHandsPlayed += 1;
+        break;
+      case "not win":
+        this.sessionHandsPlayed += 1;
+        break;
+      default:
+        this.sessionHandsPlayed += 1;
+        break;
+    }
+  }
+
+  updateStats() {
+    if (this.playerMoney > Number(localStorage.getItem("highestMoney"))) {
+      localStorage.setItem("highestMoney", this.playerMoney.toString());
+    }
+    localStorage.setItem("handsWon", this.sessionHandsWon.toString());
+    localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
+    localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
+  }
 }

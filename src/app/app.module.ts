@@ -22,6 +22,7 @@ import { GameService } from './services/game.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import * as $ from 'jquery';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import * as $ from 'jquery';
     SignupModalComponent,
     LoginModalComponent,
     ConfirmpassModalComponent,
-    ChangepassModalComponent
+    ChangepassModalComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

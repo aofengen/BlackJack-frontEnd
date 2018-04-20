@@ -1,4 +1,11 @@
+import { AuthService } from './auth.service'; 
+import { Injectable } from '@angular/core';
+
+@Injectable()
+
 export class GameService {
+
+    constructor(private as: AuthService) {}
 
     resetDeck(x, y) {
         x.bet = 0;
@@ -55,7 +62,7 @@ export class GameService {
     }
 
     dealCard(x, shoe) {
-        if (shoe.length == 0) {
+        if (shoe.length < 1 || typeof(shoe[0]) != "object") {
             shoe = this.getMainDeck()
         }
         if (x.doubleDown == true || (x.deck == "dealer" && x.hand.length == 1)) {
@@ -166,6 +173,50 @@ export class GameService {
                     p[i].result = "Loser..."
                 }
             }
+        }
+    }
+
+    getStats() {
+        let id = this.as.getUserIdNumber();
+        fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {
+            method: "GET",
+            headers: new Headers({
+                "Content-type": "application/json"
+            })
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+        });
+    }
+
+    saveStats() {
+        let id = this.as.getUserIdNumber();
+        if (id == undefined || id == NaN || id == null) {
+            return;
+        } else {
+            let userData = {
+                handsWon: Number(localStorage.getItem("handsWon")),
+                handsPlayed: Number(localStorage.getItem("handsPlayed")),
+                blackjacks: Number(localStorage.getItem("blackjacks")),
+                highMoney: Number(localStorage.getItem("highMoney")),
+                token: localStorage.getItem("token")
+            };
+            fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {
+                method: "POST",
+                headers: new Headers({
+                    "Content-type": "application/json"
+                }),
+                body: JSON.stringify(userData)
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+            });
         }
     }
 }
