@@ -233,7 +233,6 @@ export class GameComponent implements OnInit {
       this.playerMoneyAvailable -= x.bet;
     
       x.split = true;
-      y.split = true;
       y.bet = x.bet;
       this.gs.splitHands(x, y, this.shoe);
     }
@@ -294,7 +293,7 @@ export class GameComponent implements OnInit {
             p[i].result = "Push.";
             this.stats("not win");
             break;
-          case "Loser..." || p[i].bust == true:
+          case "Loser...":
             p[i].result = "You lost...";
             this.stats("not win");
             this.playerMoney -= p[i].bet;
@@ -307,6 +306,7 @@ export class GameComponent implements OnInit {
     if (this.playerMoney <= 0) {
       this.updateStats();
       this.gs.saveStats();
+      localStorage.setItem("statsSaved", "yes");
       this.outOfMoney = true;
     } else {
     this.handOver = true;

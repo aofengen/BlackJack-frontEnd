@@ -31,7 +31,8 @@ export class SignupModalComponent implements OnInit {
       alert("Please enter all fields!");
     } else {
       this.as.newUser(name, email, username, password);
-      //access newUser function from AuthService file using parameters in parens
+      localStorage.setItem("money", "0");
+      localStorage.setItem("statsSaved", "no");
       this.activeModal.close('Close click');
     }
   }

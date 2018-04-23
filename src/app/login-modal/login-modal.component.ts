@@ -26,6 +26,7 @@ export class LoginModalComponent implements OnInit {
     } else {
       this.as.loginUser(email, password);
       localStorage.setItem("money", "0");
+      localStorage.setItem("statsSaved", "no");
   	  this.activeModal.close('Close click');
     }
   }

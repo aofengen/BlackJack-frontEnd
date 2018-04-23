@@ -149,6 +149,7 @@ export class GameService {
     checkBust(x) {
         if (x.total > 21) {
             x.bust = true;
+            x.result = "Loser...";
         } 
     }
 
@@ -174,22 +175,6 @@ export class GameService {
                 }
             }
         }
-    }
-
-    getStats() {
-        let id = this.as.getUserIdNumber();
-        fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {
-            method: "GET",
-            headers: new Headers({
-                "Content-type": "application/json"
-            })
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-        });
     }
 
     saveStats() {

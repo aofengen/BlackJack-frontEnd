@@ -41,7 +41,9 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.token = null;
     this.name = null;
     this.userIdNumber = null;
-    this.gs.saveStats();
+    if (localStorage.getItem("statsSaved") == "no") {
+      this.gs.saveStats();      
+    }
     localStorage.clear();
     this.router.navigate(['/']);
   }

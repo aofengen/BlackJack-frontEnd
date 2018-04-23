@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit {
           (params: Params) => {
 			  this.id = +params['id'];
       }) 
-    console.log(this.id);
     this.router.navigate([`/stats/${this.id}`]);
   }
 

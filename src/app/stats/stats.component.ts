@@ -11,14 +11,51 @@ export class StatsComponent implements OnInit {
 
   name: string;
   money: number;
+  handsWon: number;
+  handsPlayed: number;
+  perHandsWon: number;
+  blackjacks: number;
+  highMoney: number;
+
+  totalHandsWon: number;
+  totalHandsPlayed: number;
+  totalPerHandsWon: number;
+  totalBlackjacks: number;
+  totalHighMoney: number;
 
   constructor(private as: AuthService, private gs: GameService) { }
 
   ngOnInit() {
     this.name = this.as.getName();
-    this.gs.getStats();
+    this.getStats();
     
     this.money = Number(localStorage.getItem('money'));
+    this.handsWon = Number(localStorage.getItem("handsWon"));
+    this.handsPlayed = Number(localStorage.getItem("handsPlayed"));
+    this.perHandsWon = (this.handsWon/this.handsPlayed) * 100;
+    this.blackjacks = Number(localStorage.getItem("blackjacks"));
+    this.highMoney = Number(localStorage.getItem("highMoney")); 
   }
+
+  getStats() {
+    let id = this.as.getUserIdNumber();
+    fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {
+        method: "GET",
+        headers: new Headers({
+            "Content-type": "application/json"
+        })
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+        this.totalHandsWon = data.handswon;
+        this.totalHandsPlayed = data.handsplayed;
+        this.totalPerHandsWon = (data.handswon/data.handsplayed) * 100;
+        this.totalBlackjacks = data.blackjacks;
+        this.totalHighMoney = data.mostmoneywon;
+    });
+}
 
 }
