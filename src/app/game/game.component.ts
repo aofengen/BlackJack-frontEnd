@@ -145,7 +145,7 @@ export class GameComponent implements OnInit {
     this.playerBet = Number(form.value.amount);
     if (isNaN(this.playerBet)) {
       alert("Please enter a number.");
-    } else if (this.playerBet <= 0) {
+    } else if (this.playerBet < 1) {
       alert("You must bet at least $1!");
     } else if (this.playerBet > this.playerMoney) {
       alert("You can't bet more than you have!");
