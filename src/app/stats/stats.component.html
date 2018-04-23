@@ -1,9 +1,9 @@
-<div class="row align-items-center">
+<div class="row align-items-start">
   <div class="col-2"></div>
   <div class="col-4">
-      <h2>{{name}}'s High Scores</h2>
+      <h2>{{name}}'s Stats - Current Session</h2>
     <table class="table table-dark">
-      <thead>
+      <!-- <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Player</th>
@@ -11,13 +11,22 @@
           <th scope="col">Time Played</th>
           <th scope="col">Consecutive Hands Won</th>
         </tr>
-      </thead>
-      <tbody>
+      </thead> -->
+      <tbody *ngIf="money <= 0">
+          <tr>
+            <th scope="col">You haven't played any hands yet in this session!</th>
+          </tr>
+        </tbody>
+      <tbody *ngIf="money > 0">
+        <tr>
+          <th scope="col">Current Money</th>
+          <td scope="col">{{money}}</td>
+        </tr>
       </tbody>
     </table>
   </div>
     <div class="col-4">
-      <h2>{{name}}'s All-Time Stats</h2>
+      <h2>{{name}}'s Stats - All-Time </h2>
     <table class="table table-dark">
       <thead>
         <tr>

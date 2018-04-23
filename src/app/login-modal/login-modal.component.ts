@@ -25,6 +25,7 @@ export class LoginModalComponent implements OnInit {
       alert("Please enter all fields!");
     } else {
       this.as.loginUser(email, password);
+      localStorage.setItem("money", "0");
   	  this.activeModal.close('Close click');
     }
   }

@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <h2 *ngIf="name">Hello, {{name}}</h2>
     <div class="row justify-content-end">
-      <div class="col-4">
+      <div class="col-5 justify-content-end">
         <ul class="nav">
           <li class="nav-item li2" routerLink="/game" *ngIf="this.token">Play Game</li>
           <li class="nav-item li1" routerLink="/">Home</li>
@@ -11,6 +11,7 @@
           <li class="nav-item li3" (click)="signup()" *ngIf="!this.token">Sign Up</li>
           <li class="nav-item li1" (click)="login()" *ngIf="!this.token">Login</li>
           <li class="nav-item li3" routerLink="/profile/{{userIdNumber}}" *ngIf="this.token">My Profile</li>
+          <li class="nav-item li1" routerLink="/stats/{{userIdNumber}}" *ngIf="this.token">Stats</li>
           <li class="nav-item li1" (click)="logout()" *ngIf="this.token">Logout</li>
         </ul>
       </div>

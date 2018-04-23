@@ -202,6 +202,7 @@ export class GameService {
                 handsPlayed: Number(localStorage.getItem("handsPlayed")),
                 blackjacks: Number(localStorage.getItem("blackjacks")),
                 highMoney: Number(localStorage.getItem("highMoney")),
+                totalMoney: Number(localStorage.getItem("totalMoney")),
                 token: localStorage.getItem("token")
             };
             fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {

@@ -15,10 +15,7 @@ export class GameComponent implements OnInit {
   sessionHandsWon: number;
   sessionHighMoney: number;
   sessionBlackjacks: number;
-
-  shoe = [];
-
-  pHands = [];
+  sessionTotalMoney: number;
 
   card1 = {
     bet: 0,
@@ -84,6 +81,9 @@ export class GameComponent implements OnInit {
     total: 0
   }
 
+  pHands = [this.card1, this.card2, this.card3, this.card4];
+  shoe = [];
+
   hand1Total: number;
   hand2Total: number;
   hand3Total: number;
@@ -104,26 +104,25 @@ export class GameComponent implements OnInit {
       this.sessionHandsWon = Number(localStorage.getItem("handsWon"));
       this.sessionHandsPlayed = Number(localStorage.getItem("handsPlayed"));
       this.sessionBlackjacks = Number(localStorage.getItem("blackjacks"));
-      this.sessionHighMoney = Number(localStorage.getItem("highMoney"));      
+      this.sessionHighMoney = Number(localStorage.getItem("highMoney")); 
+      this.sessionTotalMoney = Number(localStorage.getItem("totalMoney"));     
 
     } else {
       this.playerMoney = 100.00;
       this.sessionHandsWon = 0;
       this.sessionHandsPlayed = 0;
       this.sessionBlackjacks = 0;
-      this.sessionHighMoney = this.playerMoney;      
+      this.sessionHighMoney = this.playerMoney;   
+      this.sessionTotalMoney = 0;   
       
       localStorage.setItem("money", this.playerMoney.toString());
       localStorage.setItem("handsWon", this.sessionHandsWon.toString());
       localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
       localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
       localStorage.setItem("highMoney", this.sessionHighMoney.toString());
+      localStorage.setItem("totalMoney", this.sessionTotalMoney.toString());
     }
     
-    
-
-
-
     this.shoe = this.gs.getMainDeck();
     this.playerBet = 0;
     this.isPlayerBet = false;
@@ -225,8 +224,6 @@ export class GameComponent implements OnInit {
   }
 
   split(x) {
-    this.pHands = [this.card1, this.card2, this.card3, this.card4];
-
     if (this.playerMoneyAvailable < x.bet) {
       alert("You do not have enough money to split.");
     } else {
@@ -252,7 +249,6 @@ export class GameComponent implements OnInit {
     }
 
     this.gs.checkBust(x);
-    this.pHands = [this.card1, this.card2, this.card3, this.card4];
 
     if (x.bust == true) {
       console.log("Everyone Wins!");
@@ -286,11 +282,13 @@ export class GameComponent implements OnInit {
             p[i].result = "BLACKJACK!!!";
             this.stats("blackjack");
             this.playerMoney += p[i].bet * 1.5;
+            this.sessionTotalMoney += p[i].bet * 1.5;
             break;
           case "Winner!!!":
             p[i].result = "You Win!";
             this.stats("win");
             this.playerMoney += p[i].bet;
+            this.sessionTotalMoney += p[i].bet;
             break;
           case "Push!":
             p[i].result = "Push.";
@@ -340,11 +338,11 @@ export class GameComponent implements OnInit {
   }
 
   updateStats() {
-    if (this.playerMoney > Number(localStorage.getItem("highestMoney"))) {
-      localStorage.setItem("highestMoney", this.playerMoney.toString());
-    }
+    localStorage.setItem("money", this.playerMoney.toString());
     localStorage.setItem("handsWon", this.sessionHandsWon.toString());
     localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
     localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
+    localStorage.setItem("totalMoney", this.sessionTotalMoney.toString());
+
   }
 }
