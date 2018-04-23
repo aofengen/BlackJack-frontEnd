@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,9 +8,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private as: AuthService) { }
+
+  players: number;
+  leaderboard = [];
+
+  p1name: string;
+  p1money: number;
+  p2name: string;
+  p2money: number;
+  p3name: string;
+  p3money: number;
+  p4name: string;
+  p4money: number;
+  p5name: string;
+  p5money: number;
 
   ngOnInit() {
+    this.getLeaderboard();
+  }
+
+  getLeaderboard() {
+    let id = this.as.getUserIdNumber();
+    fetch('https://blackjack-java-api.herokuapp.com/leaderboard' /*'http://localhost:8080/leaderboard'*/, {
+        method: "GET",
+        headers: new Headers({
+            "Content-type": "application/json"
+        })
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+        this.players = data.length;
+        this.leaderboard = data;
+    });
   }
 
 }
