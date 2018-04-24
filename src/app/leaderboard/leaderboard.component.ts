@@ -10,19 +10,7 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(private as: AuthService) { }
 
-  players: number;
   leaderboard = [];
-
-  p1name: string;
-  p1money: number;
-  p2name: string;
-  p2money: number;
-  p3name: string;
-  p3money: number;
-  p4name: string;
-  p4money: number;
-  p5name: string;
-  p5money: number;
 
   ngOnInit() {
     this.getLeaderboard();
@@ -40,8 +28,6 @@ export class LeaderboardComponent implements OnInit {
         return response.json();
     })
     .then((data) => {
-        console.log(data);
-        this.players = data.length;
         this.leaderboard = data;
     });
   }
