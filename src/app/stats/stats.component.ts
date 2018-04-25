@@ -49,7 +49,6 @@ export class StatsComponent implements OnInit {
         return response.json();
     })
     .then((data) => {
-        console.log(data);
         this.totalHandsWon = data.handswon;
         this.totalHandsPlayed = data.handsplayed;
         this.totalPerHandsWon = (data.handswon/data.handsplayed) * 100;
