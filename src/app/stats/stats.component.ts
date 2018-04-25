@@ -22,6 +22,7 @@ export class StatsComponent implements OnInit {
   totalPerHandsWon: number;
   totalBlackjacks: number;
   totalHighMoney: number;
+  totalMoneyWon: number;
 
   constructor(private as: AuthService, private gs: GameService) { }
 
@@ -57,6 +58,7 @@ export class StatsComponent implements OnInit {
             this.totalPerHandsWon = (data.handswon/data.handsplayed) * 100;
             this.totalBlackjacks = data.blackjacks;
             this.totalHighMoney = data.mostmoneywon;
+            this.totalMoneyWon = data.totalmoneywon;
         }
     });
 }
