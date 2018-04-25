@@ -49,11 +49,15 @@ export class StatsComponent implements OnInit {
         return response.json();
     })
     .then((data) => {
-        this.totalHandsWon = data.handswon;
-        this.totalHandsPlayed = data.handsplayed;
-        this.totalPerHandsWon = (data.handswon/data.handsplayed) * 100;
-        this.totalBlackjacks = data.blackjacks;
-        this.totalHighMoney = data.mostmoneywon;
+        if (data.error) {
+            console.log(data.error);
+        } else {
+            this.totalHandsWon = data.handswon;
+            this.totalHandsPlayed = data.handsplayed;
+            this.totalPerHandsWon = (data.handswon/data.handsplayed) * 100;
+            this.totalBlackjacks = data.blackjacks;
+            this.totalHighMoney = data.mostmoneywon;
+        }
     });
 }
 
