@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.as.token = null;
     this.name = null;
     this.userIdNumber = null;
-    if (localStorage.getItem("statsSaved") == "no") {
+    if (localStorage.getItem("statsSaved") == "no" && Number(localStorage.getItem("handsPlayed")) > 0) {
       this.gs.saveStats();      
     }
     localStorage.clear();
