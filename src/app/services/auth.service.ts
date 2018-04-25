@@ -128,7 +128,9 @@ export class AuthService {
     isAuthenticated() {
         if (this.token != null) {
             return this.token != null;
-        } 
+        } else {
+            return false;
+        }
     }
 
     getName() {

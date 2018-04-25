@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
 
   ngAfterContentChecked() {
     if (localStorage.getItem("token")) {
-      this.token = localStorage.getItem("token");
+      this.as.token = localStorage.getItem("token");
       this.userIdNumber = this.as.getUserIdNumber();
       this.name = this.as.getName();
     }
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
   }
 
   logout() {
-    this.token = null;
+    this.as.token = null;
     this.name = null;
     this.userIdNumber = null;
     if (localStorage.getItem("statsSaved") == "no") {
