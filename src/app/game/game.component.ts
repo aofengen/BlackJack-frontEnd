@@ -78,6 +78,7 @@ export class GameComponent implements OnInit {
     bust: false,
     deck: "dealer",
     hand: [],
+    soft17: false,
     total: 0
   }
 
@@ -163,7 +164,7 @@ export class GameComponent implements OnInit {
 
   hit(x) {
       this.gs.dealCard(x, this.shoe);
-      this.gs.getHandValue(x.hand);
+      this.gs.getHandValue(x);
       this.gs.checkBust(x);
     if (x.deck == "dealer") {
       return;
@@ -241,7 +242,7 @@ export class GameComponent implements OnInit {
   dealerTurn(x) {
     console.log("dealer's turn");
     x.hand[1].doubleDown = false;
-    x.total = this.gs.getHandValue(x.hand);
+    x.total = this.gs.getHandValue(x);
 
     while(x.total < 17) {
       this.hit(x);

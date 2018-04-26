@@ -28,6 +28,7 @@ export class GameService {
         x.bust = false;
         x.deck = "dealer";
         x.hand = [];
+        x.soft17 = false;
         x.total = 0;
 
         return x;
@@ -74,7 +75,7 @@ export class GameService {
         if(x.hand.length == 2) {
             this.checkBlackjack(x);
         }
-        x.total = this.getHandValue(x.hand);
+        x.total = this.getHandValue(x);
     }
 
     checkBlackjack(deck) {
@@ -90,11 +91,12 @@ export class GameService {
     getHandValue(x) {
         let handValue = 0;
         let aces = 0;
-        for (let i = 0; i < x.length; i++) {
-          if (x[i].doubleDown == true) {
+        for (let i = 0; i < x.hand.length; i++) {
+          if (x.hand[i].doubleDown == true) {
             break;
           } else {
-            switch (x[i].value.toLowerCase()) {
+              console.log(x.hand);
+            switch (x.hand[i].value.toLowerCase()) {
                 case 'two': handValue+=2; break;
                 case 'three': handValue+=3; break;
                 case 'four': handValue+=4; break;
@@ -112,13 +114,17 @@ export class GameService {
             }
            }
         }
+        console.log("line 116: " + handValue)
         for(let i = 0; i<aces; i++) {
 			if(handValue>10) {
-				handValue+=1;
+                handValue+=1;
+                if (x.deck = "dealer") x.soft17 = false;
 			} else {
-				handValue+=11;
+                handValue+=11;
+                if (x.deck = "dealer") x.soft17 = true;
             }
-		}
+        }
+        console.log(handValue)
         return handValue;
       }
 
@@ -157,7 +163,7 @@ export class GameService {
         for (let i = 0; i < p.length; i++) {
             if (p[i].doubleDown == true) {
                 p[i].hand[2].doubleDown = false;
-                p[i].total = this.getHandValue(p[i].hand);
+                p[i].total = this.getHandValue(p[i]);
             }
 
             if (p[i].hand.length < 2) {
