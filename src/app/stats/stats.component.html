@@ -3,12 +3,12 @@
   <div class="col-4">
       <h2>{{name}}'s Stats - Current Session</h2>
     <table class="table table-dark">
-      <tbody *ngIf="money <= 0">
+      <tbody *ngIf="money <= 0 || handsPlayed == 0">
           <tr>
             <th scope="col">You haven't played any hands yet in this session!</th>
           </tr>
         </tbody>
-      <tbody *ngIf="money > 0">
+      <tbody *ngIf="money > 0 && handsPlayed != 0">
         <tr>
           <th scope="col">Current Money</th>
           <td scope="col">{{money}}</td>
