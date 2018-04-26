@@ -114,7 +114,6 @@ export class GameService {
             }
            }
         }
-        console.log("line 116: " + handValue)
         for(let i = 0; i<aces; i++) {
 			if(handValue>10) {
                 handValue+=1;
@@ -124,7 +123,6 @@ export class GameService {
                 if (x.deck = "dealer") x.soft17 = true;
             }
         }
-        console.log(handValue)
         return handValue;
       }
 
