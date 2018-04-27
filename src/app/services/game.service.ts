@@ -95,7 +95,6 @@ export class GameService {
           if (x.hand[i].doubleDown == true) {
             break;
           } else {
-              console.log(x.hand);
             switch (x.hand[i].value.toLowerCase()) {
                 case 'two': handValue+=2; break;
                 case 'three': handValue+=3; break;
@@ -114,13 +113,18 @@ export class GameService {
             }
            }
         }
+        if (x.deck == "dealer" && aces > 0) {
+            if (handValue > 10) {
+                x.soft17 = false;
+            } else {
+                x.soft17 = true;
+            }
+        }
         for(let i = 0; i<aces; i++) {
 			if(handValue>10) {
                 handValue+=1;
-                if (x.deck = "dealer") x.soft17 = false;
 			} else {
                 handValue+=11;
-                if (x.deck = "dealer") x.soft17 = true;
             }
         }
         return handValue;

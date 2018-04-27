@@ -244,7 +244,7 @@ export class GameComponent implements OnInit {
     x.hand[1].doubleDown = false;
     x.total = this.gs.getHandValue(x);
 
-    while(x.total < 17) {
+    while(x.total < 17 || x.soft17 == true) {
       this.hit(x);
     }
 
