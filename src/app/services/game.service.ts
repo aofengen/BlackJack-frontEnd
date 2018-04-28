@@ -96,32 +96,32 @@ export class GameService {
             x.hand[1].doubleDown = false;
         } else {
             for (let i = 0; i < x.hand.length; i++) {
-            if (x.hand[i].doubleDown == true) {
-                break;
-            } else {
-                switch (x.hand[i].value.toLowerCase()) {
-                    case 'two': handValue+=2; break;
-                    case 'three': handValue+=3; break;
-                    case 'four': handValue+=4; break;
-                    case 'five': handValue+=5; break;
-                    case 'six': handValue+=6; break;
-                    case 'seven': handValue+=7; break;
-                    case 'eight': handValue+=8; break;
-                    case 'nine': handValue+=9; break;
-                    case 'ten': handValue+=10; break;
-                    case 'jack': handValue+=10; break;
-                    case 'queen': handValue+=10; break;
-                    case 'king': handValue+=10; break;
-                    case 'ace': aces+=1; break;
-                    default: break;
+                if (x.hand[i].doubleDown == true) {
+                    break;
+                } else {
+                    switch (x.hand[i].value.toLowerCase()) {
+                        case 'two': handValue+=2; break;
+                        case 'three': handValue+=3; break;
+                        case 'four': handValue+=4; break;
+                        case 'five': handValue+=5; break;
+                        case 'six': handValue+=6; break;
+                        case 'seven': handValue+=7; break;
+                        case 'eight': handValue+=8; break;
+                        case 'nine': handValue+=9; break;
+                        case 'ten': handValue+=10; break;
+                        case 'jack': handValue+=10; break;
+                        case 'queen': handValue+=10; break;
+                        case 'king': handValue+=10; break;
+                        case 'ace': aces+=1; break;
+                        default: break;
+                    }
                 }
             }
-            }
             if (x.deck == "dealer" && aces > 0) {
-                if (handValue > 10) {
-                    x.soft17 = false;
-                } else {
+                if (handValue == 6) {
                     x.soft17 = true;
+                } else {
+                    x.soft17 = false;
                 }
             }
             for(let i = 0; i<aces; i++) {
