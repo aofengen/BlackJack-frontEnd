@@ -156,8 +156,8 @@ export class GameComponent implements OnInit {
       this.isPlayerBet = true;
 
       this.gs.startHand(this.card1, this.dealer, this.shoe);
-      if (this.card1.blackjack == true) {
-        this.handleMoney([this.card1]);
+      if (this.card1.blackjack == true || this.dealer.blackjack == true) {
+        this.handleMoney([this.card1], this.dealer);
       }
     }
   }
@@ -269,38 +269,49 @@ export class GameComponent implements OnInit {
     } 
   }
 
-  handleMoney(p) {
-    for(let i = 0; i < p.length; i++) {
-      if (p[i].result == "") {
-        break;
-      } else if (p[i].bust == true) {
+  handleMoney(p, d?) {
+    if (d != undefined) {
+      if (p[0].blackjack == true) {
+        p[0].result = "Push.";
         this.stats("not win");
-        this.playerMoney -= p[i].bet;
       } else {
-        switch (p[i].result) {
-          case "BLACKJACK!!!":
-            p[i].result = "BLACKJACK!!!";
-            this.stats("blackjack");
-            this.playerMoney += p[i].bet * 1.5;
-            this.sessionTotalMoney += p[i].bet * 1.5;
-            break;
-          case "Winner!!!":
-            p[i].result = "You Win!";
-            this.stats("win");
-            this.playerMoney += p[i].bet;
-            this.sessionTotalMoney += p[i].bet;
-            break;
-          case "Push!":
-            p[i].result = "Push.";
-            this.stats("not win");
-            break;
-          case "Loser...":
-            p[i].result = "You lost...";
-            this.stats("not win");
-            this.playerMoney -= p[i].bet;
-            break;
-          default:
-            break;
+        p[0].result = "Dealer Blackjack...";
+        this.stats("not win");
+        this.playerMoney -= p[0].bet;
+      }
+    } else {
+      for(let i = 0; i < p.length; i++) {
+        if (p[i].result == "") {
+          break;
+        } else if (p[i].bust == true) {
+          this.stats("not win");
+          this.playerMoney -= p[i].bet;
+        } else {
+          switch (p[i].result) {
+            case "BLACKJACK!!!":
+              p[i].result = "BLACKJACK!!!";
+              this.stats("blackjack");
+              this.playerMoney += p[i].bet * 1.5;
+              this.sessionTotalMoney += p[i].bet * 1.5;
+              break;
+            case "Winner!!!":
+              p[i].result = "You Win!";
+              this.stats("win");
+              this.playerMoney += p[i].bet;
+              this.sessionTotalMoney += p[i].bet;
+              break;
+            case "Push!":
+              p[i].result = "Push.";
+              this.stats("not win");
+              break;
+            case "Loser...":
+              p[i].result = "You lost...";
+              this.stats("not win");
+              this.playerMoney -= p[i].bet;
+              break;
+            default:
+              break;
+          }
         }
       }
     }
@@ -310,11 +321,11 @@ export class GameComponent implements OnInit {
       localStorage.setItem("statsSaved", "yes");
       this.outOfMoney = true;
     } else {
-    this.handOver = true;
-    if (this.playerMoney > Number(localStorage.getItem("highMoney"))) {
-      localStorage.setItem("highMoney", this.playerMoney.toString());
-    }
-    this.updateStats();
+      this.handOver = true;
+      if (this.playerMoney > Number(localStorage.getItem("highMoney"))) {
+        localStorage.setItem("highMoney", this.playerMoney.toString());
+      }
+      this.updateStats();
     }
   }
 
