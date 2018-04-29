@@ -157,14 +157,14 @@ export class GameComponent implements OnInit {
 
       this.gs.startHand(this.card1, this.dealer, this.shoe);
       if (this.card1.blackjack == true || this.dealer.blackjack == true) {
-        this.dealer[1].doubleDown = false;
+        this.dealer.hand[1].doubleDown = false;
         this.stand(this.card1.blackjack, this.dealer.blackjack);
         if (this.dealer.blackjack == true) {
           this.handleMoney([this.card1], this.dealer);
         } else {
           this.handleMoney([this.card1]);
         }
-        if (this.playerMoney <= 1) {
+        if (this.playerMoney < 1) {
           this.outOfMoney = true;
         } else {
           this.handOver = true;
