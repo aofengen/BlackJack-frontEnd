@@ -156,9 +156,12 @@ export class GameComponent implements OnInit {
       this.isPlayerBet = true;
 
       this.gs.startHand(this.card1, this.dealer, this.shoe);
+      this.gs.checkBlackjack(this.card1);
+      this.gs.checkBlackjack(this.dealer);
+
       if (this.card1.blackjack == true || this.dealer.blackjack == true) {
         this.dealer.hand[1].doubleDown = false;
-        this.stand(this.card1.blackjack, this.dealer.blackjack);
+        this.stand(this.card1, this.dealer);
         if (this.dealer.blackjack == true) {
           this.handleMoney([this.card1], this.dealer);
         } else {
@@ -188,39 +191,40 @@ export class GameComponent implements OnInit {
 
   stand(x, y?) {
     if (y != undefined) {
-      if (x == true || y == true) 
-      this.gs.getHandValue(y);
-      return;
-    }
-    if (x.split == true) {
-      switch (x) {
-        case this.card1:
-          x.stand = true;
-          break;
-        case this.card2:
-          x.stand = true;
-          break;
-        case this.card3:
-          if(this.card3.splitAces != true) {
+      x.total = this.gs.getHandValue(x);
+      y.total = this.gs.getHandValue(y);
+      x.stand = true;
+    } else {
+      if (x.split == true) {
+        switch (x) {
+          case this.card1:
             x.stand = true;
             break;
-          } else {
+          case this.card2:
             x.stand = true;
-            this.card4.stand = true;
+            break;
+          case this.card3:
+            if(this.card3.splitAces != true) {
+              x.stand = true;
+              break;
+            } else {
+              x.stand = true;
+              this.card4.stand = true;
+              this.dealerTurn(this.dealer);
+              break;
+          }
+          case this.card4:
+            x.stand = true;
             this.dealerTurn(this.dealer);
             break;
+          default:
+            break;
         }
-        case this.card4:
-          x.stand = true;
-          this.dealerTurn(this.dealer);
-          break;
-        default:
-          break;
+      } else {
+        x.stand = true;
+        this.dealerTurn(this.dealer);
+        return;
       }
-    } else {
-      x.stand = true;
-      this.dealerTurn(this.dealer);
-      return;
     }
   }
 
