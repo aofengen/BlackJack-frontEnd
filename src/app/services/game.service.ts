@@ -55,10 +55,10 @@ export class GameService {
     }
 
     startHand(x, d, shoe) {
-        // this.dealCard(x, shoe);
+        this.dealCard(x, shoe);
         this.dealCard(d, shoe);
 
-        // this.dealCard(x, shoe);
+        this.dealCard(x, shoe);
         this.dealCard(d, shoe);
     }
 

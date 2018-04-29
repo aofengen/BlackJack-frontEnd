@@ -335,7 +335,7 @@ export class GameComponent implements OnInit {
         }
       }
     }
-    if (this.playerMoney <= 1) {
+    if (this.playerMoney < 1) {
       this.updateStats();
       this.gs.saveStats();
       localStorage.setItem("statsSaved", "yes");
