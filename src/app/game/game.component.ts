@@ -188,7 +188,9 @@ export class GameComponent implements OnInit {
 
   stand(x, y?) {
     if (y != undefined) {
-      if (x == true || y == true) return;
+      if (x == true || y == true) 
+      this.gs.getHandValue(y);
+      return;
     }
     if (x.split == true) {
       switch (x) {
