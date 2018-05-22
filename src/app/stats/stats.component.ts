@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { GameService } from '../services/game.service';
+import { BlackjackService } from '../services/blackjack.service';
 
 @Component({
   selector: 'app-stats',
@@ -24,7 +24,7 @@ export class StatsComponent implements OnInit {
   totalHighMoney: number;
   totalMoneyWon: number;
 
-  constructor(private as: AuthService, private gs: GameService) { }
+  constructor(private as: AuthService, private gs: BlackjackService) { }
 
   ngOnInit() {
     this.name = this.as.getName();
@@ -40,7 +40,7 @@ export class StatsComponent implements OnInit {
 
   getStats() {
     let id = this.as.getUserIdNumber();
-    fetch(`https://blackjack-java-api.herokuapp.com/stats/${id}` /*`http://localhost:8080/stats/${id}`*/, {
+    fetch(/*`https://blackjack-java-api.herokuapp.com/stats/${id}`*/ `http://localhost:8080/stats/${id}`, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"

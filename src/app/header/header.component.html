@@ -5,7 +5,8 @@
     <div class="row justify-content-end">
       <div class="col-5 justify-content-end">
         <ul class="nav">
-          <li class="nav-item li2" routerLink="/game" *ngIf="this.as.token">Play Game</li>
+          <li class="nav-item li2" routerLink="/blackjack" *ngIf="this.as.token">Blackjack</li>
+          <li class="nav-item li2" routerLink="/poker" *ngIf="this.as.token">Video Poker</li>
           <li class="nav-item li1" routerLink="/">Home</li>
           <li class="nav-item li2" routerLink="/leaderboard">High Scores!</li>
           <li class="nav-item li3" (click)="signup()" *ngIf="!this.as.token">Sign Up</li>

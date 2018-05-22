@@ -9,7 +9,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { GameComponent } from './game/game.component';
+import { BlackjackComponent } from './blackjack/blackjack.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { CardsComponent } from './cards/cards.component';
@@ -18,7 +18,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ConfirmpassModalComponent } from './confirmpass-modal/confirmpass-modal.component';
 import { ChangepassModalComponent } from './changepass-modal/changepass-modal.component';
 
-import { GameService } from './services/game.service';
+import { BlackjackService } from './services/blackjack.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import * as $ from 'jquery';
@@ -29,7 +29,7 @@ import { StatsComponent } from './stats/stats.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    GameComponent,
+    BlackjackComponent,
     ProfileComponent,
     LeaderboardComponent,
     CardsComponent,
@@ -48,7 +48,7 @@ import { StatsComponent } from './stats/stats.component';
     ReactiveFormsModule
   ],
   providers: [
-    GameService,
+    BlackjackService,
     NgbActiveModal,
     AuthGuard,
     AuthService

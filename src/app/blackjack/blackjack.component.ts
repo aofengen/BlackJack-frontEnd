@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { GameService } from '../services/game.service';
+import { BlackjackService } from '../services/blackjack.service';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  selector: 'app-blackjack',
+  templateUrl: './blackjack.component.html',
+  styleUrls: ['./blackjack.component.css']
 })
-export class GameComponent implements OnInit {
+export class BlackjackComponent implements OnInit {
 
 
-  constructor(public gs: GameService) { }
+  constructor(public gs: BlackjackService) { }
   sessionHandsPlayed: number;
   sessionHandsWon: number;
   sessionHighMoney: number;

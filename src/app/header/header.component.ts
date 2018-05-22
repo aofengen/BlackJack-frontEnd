@@ -4,7 +4,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupModalComponent } from '../signup-modal/signup-modal.component';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../services/auth.service';
-import { GameService } from '../services/game.service';
+import { BlackjackService } from '../services/blackjack.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,7 @@ import { GameService } from '../services/game.service';
 })
 export class HeaderComponent implements OnInit, AfterContentChecked {
 
-  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private gs: GameService) { }
+  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private gs: BlackjackService) { }
 
     token: string;
     name: string;
