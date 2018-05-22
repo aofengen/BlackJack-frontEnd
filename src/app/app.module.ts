@@ -13,6 +13,8 @@ import { BlackjackComponent } from './blackjack/blackjack.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { CardsComponent } from './cards/cards.component';
+import { StatsComponent } from './stats/stats.component';
+import { VideopokerComponent } from './videopoker/videopoker.component';
 import { SignupModalComponent } from './signup-modal/signup-modal.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ConfirmpassModalComponent } from './confirmpass-modal/confirmpass-modal.component';
@@ -21,8 +23,9 @@ import { ChangepassModalComponent } from './changepass-modal/changepass-modal.co
 import { BlackjackService } from './services/blackjack.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { VideopokerService } from './services/videopoker.service';
 import * as $ from 'jquery';
-import { StatsComponent } from './stats/stats.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { StatsComponent } from './stats/stats.component';
     LoginModalComponent,
     ConfirmpassModalComponent,
     ChangepassModalComponent,
-    StatsComponent
+    StatsComponent,
+    VideopokerComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { StatsComponent } from './stats/stats.component';
     BlackjackService,
     NgbActiveModal,
     AuthGuard,
-    AuthService
+    AuthService,
+    VideopokerService
   ],
   entryComponents: [
     SignupModalComponent,

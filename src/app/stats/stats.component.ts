@@ -28,7 +28,7 @@ export class StatsComponent implements OnInit {
 
   ngOnInit() {
     this.name = this.as.getName();
-    this.getStats();
+    this.getBlackjackStats();
     
     this.money = Number(localStorage.getItem('money'));
     this.handsWon = Number(localStorage.getItem("handsWon"));
@@ -38,9 +38,9 @@ export class StatsComponent implements OnInit {
     this.highMoney = Number(localStorage.getItem("highMoney")); 
   }
 
-  getStats() {
+  getBlackjackStats() {
     let id = this.as.getUserIdNumber();
-    fetch(/*`https://blackjack-java-api.herokuapp.com/stats/${id}`*/ `http://localhost:8080/stats/${id}`, {
+    fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"

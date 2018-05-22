@@ -36,7 +36,7 @@ export class BlackjackService {
 
     getMainDeck() {
         let x = []
-        fetch(/*'https://blackjack-java-api.herokuapp.com/shuffle'*/ 'http://localhost:8080/shuffle', {
+        fetch(/*'https://blackjack-java-api.herokuapp.com/blackjack/shuffle'*/ 'http://localhost:8080/blackjack/shuffle', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -203,7 +203,7 @@ export class BlackjackService {
                 totalMoney: Number(localStorage.getItem("totalMoney")),
                 token: localStorage.getItem("token")
             };
-            fetch(/*`https://blackjack-java-api.herokuapp.com/stats/${id}`*/ `http://localhost:8080/stats/${id}`, {
+            fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-type": "application/json"

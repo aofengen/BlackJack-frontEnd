@@ -18,7 +18,7 @@ export class LeaderboardComponent implements OnInit {
 
   getLeaderboard() {
     let id = this.as.getUserIdNumber();
-    fetch(/*'https://blackjack-java-api.herokuapp.com/leaderboard'*/ 'http://localhost:8080/leaderboard', {
+    fetch(/*'https://blackjack-java-api.herokuapp.com/blackjack/leaderboard'*/ 'http://localhost:8080/blackjack/leaderboard', {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"
