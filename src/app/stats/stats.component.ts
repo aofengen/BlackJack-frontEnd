@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { BlackjackService } from '../services/blackjack.service';
+import { VideopokerService } from '../services/videopoker.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-stats',
@@ -8,6 +10,8 @@ import { BlackjackService } from '../services/blackjack.service';
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit {
+
+  showPokerStats = false;
 
   name: string;
   money: number;
@@ -24,7 +28,7 @@ export class StatsComponent implements OnInit {
   totalHighMoney: number;
   totalMoneyWon: number;
 
-  constructor(private as: AuthService, private gs: BlackjackService) { }
+  constructor(private as: AuthService, private gs: BlackjackService, private vs: VideopokerService) { }
 
   ngOnInit() {
     this.name = this.as.getName();
@@ -61,6 +65,26 @@ export class StatsComponent implements OnInit {
             this.totalMoneyWon = data.totalmoneywon;
         }
     });
-}
+  }
 
+  getVideoPokerStats() {
+    let id = this.as.getUserIdNumber();
+    fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        })
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data);
+    })
+  }
+
+showPoker() {
+    this.showPokerStats = !this.showPokerStats;
+
+  }
 }

@@ -14,4 +14,7 @@ export class VideopokerComponent implements OnInit {
     this.vs.getMainDeck();
   }
 
+  postStats() {
+    this.vs.postStats();
+  }
 }

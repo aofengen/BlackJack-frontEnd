@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Users } from '../shared/users.model';
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as $ from 'jquery';
 
 @Injectable()
 
@@ -14,6 +15,11 @@ export class AuthService {
     // private userInfo: Users[] = [];
     
     constructor(public activeModal: NgbActiveModal, private router: Router) {}
+
+    pageClicked(x) {
+        $('.nav-item').removeClass('active');
+        $('#' + x).addClass('active');
+    }
 
     newUser(name: string, email: string, username: string, password: string) {
         let newUser = {

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmpassModalComponent } from '../confirmpass-modal/confirmpass-modal.component';
 import { ChangepassModalComponent } from '../changepass-modal/changepass-modal.component';
+import { HeaderComponent } from '../header/header.component';
 
 import { AuthService } from '../services/auth.service';
 import * as $ from 'jquery';
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.loggedIn = this.as.isAuthenticated();
 
+    this.as.pageClicked("profileLink");
     $('#name').val(this.as.getName());
     $('#username').val(this.as.getUsername());
     $('#email').val(this.as.getEmail());

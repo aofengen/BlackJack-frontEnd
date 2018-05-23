@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service';;
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,16 @@ export class HomeComponent implements OnInit {
 
   constructor(private as: AuthService, private router: Router) { }
 
+  goToPoker = false;
+
   ngOnInit() { }
+
+  showPoker() {
+    this.goToPoker = !this.goToPoker;
+  }
+
+  pageChecked(x) {
+    this.as.pageClicked(x);
+  }
 
 }

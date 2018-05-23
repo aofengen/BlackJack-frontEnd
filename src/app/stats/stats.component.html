@@ -1,7 +1,9 @@
-<div class="row align-items-start">
+<button class="btn btn-md btn-default" (click)="showPoker()" *ngIf="!showPokerStats">Show Poker Stats</button>
+<button class="btn btn-md btn-default" (click)="showPoker()" *ngIf="showPokerStats">Show Blackjack Stats</button>
+<div class="row align-items-start" *ngIf="!showPokerStats">
   <div class="col-2"></div>
   <div class="col-4">
-      <h2>{{name}}'s Stats - Current Session</h2>
+      <h2>{{name}}'s Blackjack Stats - Current Session</h2>
     <table class="table table-dark">
       <tbody *ngIf="money <= 0 || handsPlayed == 0">
           <tr>
@@ -37,7 +39,7 @@
     </table>
   </div>
   <div class="col-4">
-    <h2>{{name}}'s Stats - All-Time </h2>
+    <h2>{{name}}'s Blackjack Stats - All-Time </h2>
     <table class="table table-dark">
       <tbody>
         <tr>
@@ -69,3 +71,75 @@
   </div>
   <div class="col-2"></div>
 </div>
+
+<div class="row align-items-start" *ngIf="showPokerStats">
+    <div class="col-2"></div>
+    <div class="col-4">
+        <h2>{{name}}'s Video Poker Stats - Current Session</h2>
+      <table class="table table-dark">
+        <tbody *ngIf="money <= 0 || handsPlayed == 0">
+            <tr>
+              <th scope="col">You haven't played any hands yet in this session!</th>
+            </tr>
+          </tbody>
+        <tbody *ngIf="money > 0 && handsPlayed != 0">
+          <tr>
+            <th scope="col">Current Money</th>
+            <td scope="col">{{money}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Hands Won</th>
+            <td scope="col">{{handsWon}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Hands Played</th>
+            <td scope="col">{{handsPlayed}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Win %</th>
+            <td scope="col">{{perHandsWon}} %</td>
+          </tr>
+          <tr>
+            <th scope="col">Blackjacks</th>
+            <td scope="col">{{blackjacks}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Highest Dollar Amount</th>
+            <td scope="col">{{highMoney}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <h2>{{name}}'s Video Poker Stats - All-Time </h2>
+      <table class="table table-dark">
+        <tbody>
+          <tr>
+            <th scope="col">Hands Won</th>
+            <td scope="col">{{totalHandsWon}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Hands Played</th>
+            <td scope="col">{{totalHandsPlayed}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Win %</th>
+            <td scope="col">{{totalPerHandsWon}} %</td>
+          </tr>
+          <tr>
+            <th scope="col">Blackjacks</th>
+            <td scope="col">{{totalBlackjacks}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Highest Dollar Amount</th>
+            <td scope="col">{{totalHighMoney}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Lifetime Money Won</th>
+            <td scope="col">{{totalMoneyWon}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
