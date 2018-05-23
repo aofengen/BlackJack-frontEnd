@@ -1,8 +1,11 @@
 <div class="row justify-content-center">
   <!-- <div class="col-2"></div> -->
     <div class="col-10">
-    <table class="table table-dark">
+    <table class="table table-dark" id="blackjackTable">
       <thead>
+        <tr>
+          <th scope="col">BLACKJACK</th>
+        </tr>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Player</th>
@@ -30,3 +33,39 @@
   </div>
   <!-- <div class="col-2"></div> -->
 </div>
+<br>
+<div class="row justify-content-center">
+    <!-- <div class="col-2"></div> -->
+      <div class="col-10">
+      <table class="table table-dark" id="pokerTable">
+        <thead>
+          <tr>
+            <th scope="col">VIDEO POKER</th>
+          </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player</th>
+            <th scope="col">Highest Dollar Amount</th>
+            <th scope="col">Hands Won</th>
+            <th scope="col">Hands Played</th>
+            <th scope="col">Winning Percentage</th>
+            <th scope="col">Blackjacks</th>
+            <th scope="col">Lifetime Money Won</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let x of (leaderboard)">
+          <tr>
+              <th scope="row">{{x.place}}</th>
+              <td>{{x.name}}</td>
+              <td>{{x.money}}</td>
+              <td>{{x.handswon}}</td>
+              <td>{{x.handsplayed}}</td>
+              <td>{{x.handswon/x.handsplayed * 100}}</td>
+              <td>{{x.blackjacks}}</td>
+              <td>{{x.totalmoney}}</td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+    <!-- <div class="col-2"></div> -->
+  </div>
