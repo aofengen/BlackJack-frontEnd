@@ -1,6 +1,6 @@
 {
-  "name": "blackjack-frontend",
-  "version": "1.0.0",
+  "name": "casino-frontend",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

@@ -1,3 +1,61 @@
-<button type="button" (click)="getStats()">Get Stats</button>
-<button type="button" (click)="postStats()">Post Stats</button>
-<button type="button" (click)="getTopTen()">Get Top Ten</button>
+<div class="container-fluid">
+  <form class="row" (ngSubmit)="getBet(f)" #f="ngForm" *ngIf="!isPlayerBet">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <label for="bet">How much would you like to bet? You currently have: ${{playerMoney}}</label>
+      <div class="input-group">
+      <input type="text" class="form-control" placeholder="Bet Amount" name="amount" id="amount" ngModel>
+      <div class="input-group-append">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-4"></div>
+  </form>
+  <div class="row" *ngIf="isPlayerBet">
+    <div class="col-4"></div>
+    <div class="col-4">
+      <h3 style="text-align: center" *ngIf="!handOver && !outOfMoney">Money remaining: ${{playerMoneyAvailable}}</h3>
+      <h3 style="text-align: center" *ngIf="handOver && !outOfMoney">You now have: ${{playerMoney}}</h3>
+      <button type="button" (click)="reset()" *ngIf="handOver && !outOfMoney" class="btn btn-success">Next Hand</button>
+      <h3 style="text-align: center" *ngIf="outOfMoney">You now have: ${{playerMoney}}. Thanks for playing! Would you like to play again?</h3>
+      <button type="button" routerLink="/" *ngIf="outOfMoney" class="btn btn-primary">Play Again</button>
+    </div>
+    <div class="col-4"></div>
+  </div> 
+  <div *ngIf="isPlayerBet" class="row hand justify-content-around">
+    <b *ngIf="handOver">{{deck.result}}</b>
+    <app-cards [hand]="deck.hand"></app-cards>
+  </div>
+  <div class="row justify-content-around" *ngIf="isPlayerBet && !tradingCards">
+    <div class="col">
+      <button class="btn btn-lg btn-success" *ngIf="tradeCards.includes(1)" (click)="keepCard(1)">KEEP</button>
+      <button class="btn btn-lg btn-danger" *ngIf="!tradeCards.includes(1)" (click)="tradeCard(1)">TRADE</button>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-lg btn-success" *ngIf="tradeCards.includes(2)" (click)="keepCard(2)">KEEP</button>
+      <button class="btn btn-lg btn-danger" *ngIf="!tradeCards.includes(2)" (click)="tradeCard(2)">TRADE</button>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-lg btn-success" *ngIf="tradeCards.includes(3)" (click)="keepCard(3)">KEEP</button>
+      <button class="btn btn-lg btn-danger" *ngIf="!tradeCards.includes(3)" (click)="tradeCard(3)">TRADE</button>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-lg btn-success" *ngIf="tradeCards.includes(4)" (click)="keepCard(4)">KEEP</button>
+      <button class="btn btn-lg btn-danger" *ngIf="!tradeCards.includes(4)" (click)="tradeCard(4)">TRADE</button>
+    </div>
+
+    <div class="col">
+      <button class="btn btn-lg btn-success" *ngIf="tradeCards.includes(5)" (click)="keepCard(5)">KEEP</button>
+      <button class="btn btn-lg btn-danger" *ngIf="!tradeCards.includes(5)" (click)="tradeCard(5)">TRADE</button>
+    </div>
+  </div>
+  <div class="row align-items-center" *ngIf="isPlayerBet && !tradingCards">
+    <div class="col-2">
+      <button type="button" class="btn btn-default btn-lg" (click)="throwCards()">Trade Cards</button>
+    </div>
+  </div>
+</div>
