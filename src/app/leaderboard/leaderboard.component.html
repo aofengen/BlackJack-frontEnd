@@ -19,7 +19,7 @@
           <th scope="col">Lifetime Money Won</th>
         </tr>
       </thead>
-      <tbody *ngFor="let x of (leaderboard)">
+      <tbody *ngFor="let x of (blackjackLeaderboard)">
         <tr>
             <th scope="row">{{x.place}}</th>
             <td>{{x.name}}</td>
@@ -37,36 +37,67 @@
 </div>
 <br>
 <div class="row justify-content-center" *ngIf="showPokerLeaderboard">
-    <!-- <div class="col-2"></div> -->
-      <div class="col-10">
-      <table class="table table-dark" id="pokerTable">
-        <thead>
-          <tr>
-            <th scope="col">VIDEO POKER</th>
-          </tr>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Player</th>
-            <th scope="col">Highest Dollar Amount</th>
-            <th scope="col">Hands Won</th>
-            <th scope="col">Hands Played</th>
-            <th scope="col">Winning Percentage</th>
-            <th scope="col">Blackjacks</th>
-            <th scope="col">Lifetime Money Won</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let x of (leaderboard)">
-          <tr>
-              <th scope="row">{{x.place}}</th>
-              <td>{{x.name}}</td>
-              <td>{{x.money}}</td>
-              <td>{{x.handswon}}</td>
-              <td>{{x.handsplayed}}</td>
-              <td>{{x.handswon/x.handsplayed * 100}}</td>
-              <td>{{x.blackjacks}}</td>
-              <td>{{x.totalmoney}}</td>
-          </tr>
-        </tbody>
+  <!-- <div class="col-2"></div> -->
+  <button type="button" (click)="showStats2()" *ngIf="!showpage2">Next Page</button>
+  <button type="button" (click)="showStats2()" *ngIf="showpage2">Previous Page</button>
+    <div class="col-10">
+    <table class="table table-dark" id="pokerTable" *ngIf="!showPage2">
+      <thead>
+        <tr>
+          <th scope="col">VIDEO POKER</th>
+        </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Player</th>
+          <th scope="col">Highest Dollar Amount</th>
+          <th scope="col">Hands Won</th>
+          <th scope="col">Hands Played</th>
+          <th scope="col">Winning Percentage</th>
+          <th scope="col">Lifetime Money Won</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let x of (pokerLeaderboard)">
+        <tr>
+            <th scope="row">{{x.place}}</th>
+            <td scope="row">{{x.name}}</td>
+            <td scope="row">{{x.money}}</td>
+            <td scope="row">{{x.handswon}}</td>
+            <td scope="row">{{x.handsplayed}}</td>
+            <td scope="row">{{x.handswon/x.handsplayed * 100}}</td>
+            <td scope="row">{{x.totalmoney}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-dark" id="pokerTable" *ngIf="showPage2">
+      <thead>
+        <tr>
+          <th scope="col">VIDEO POKER - Page 2</th>
+        </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Player</th>
+          <th scope="col">Royal Flushes</th>
+          <th scope="col">Straight Flushes</th>
+          <th scope="col">Four of a Kind</th>
+          <th scope="col">Full Houses</th>
+          <th scope="col">Flushes</th>
+          <th scope="col">Straights</th>
+          <th scope="col">Three of a Kind</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let x of (pokerLeaderboard)">
+        <tr>
+            <th scope="row">{{x.place}}</th>
+            <td scope="row">{{x.name}}</td>
+            <td scope="row">{{x.royalflush}}</td>
+            <td scope="row">{{x.straightflush}}</td>
+            <td scope="row">{{x.fourkind}}</td>
+            <td scope="row">{{x.fullhouse}}</td>
+            <td scope="row">{{x.flush}}</td>
+            <td scope="row">{{x.straight}}</td>
+            <td scope="row">{{x.threekind}}</td>
+        </tr>
+      </tbody>
     </table>
     </div>
     <!-- <div class="col-2"></div> -->

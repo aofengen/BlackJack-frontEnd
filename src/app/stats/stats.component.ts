@@ -28,11 +28,38 @@ export class StatsComponent implements OnInit {
   totalHighMoney: number;
   totalMoneyWon: number;
 
+  pokermoney: number;
+  pokerhighmoney: number;
+  pokerhandswon: number;
+  pokerhandsplayed: number;
+  pokerperhandswon: number;
+  royalflush: number;
+  straightflush: number;
+  fourkind: number;
+  fullhouse: number;
+  flush: number;
+  straight: number;
+  threekind: number;
+
+  pokertotalmoney: number;
+  pokertotalhighmoney: number;
+  pokertotalhandswon: number;
+  pokertotalhandsplayed: number;
+  pokertotalperhandswon: number;
+  totalroyalflush: number;
+  totalstraightflush: number;
+  totalfourkind: number;
+  totalfullhouse: number;
+  totalflush: number;
+  totalstraight: number;
+  totalthreekind: number;
+
   constructor(private as: AuthService, private gs: BlackjackService, private vs: VideopokerService) { }
 
   ngOnInit() {
     this.name = this.as.getName();
     this.getBlackjackStats();
+    this.getVideoPokerStats();
     
     this.money = Number(localStorage.getItem('money'));
     this.handsWon = Number(localStorage.getItem("handsWon"));
@@ -44,6 +71,7 @@ export class StatsComponent implements OnInit {
 
   getBlackjackStats() {
     let id = this.as.getUserIdNumber();
+    console.log(id);
     fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
         method: "GET",
         headers: new Headers({
@@ -80,6 +108,17 @@ export class StatsComponent implements OnInit {
     })
     .then((data) => {
         console.log(data);
+        this.pokertotalmoney = data.totalmoney;
+        this.pokertotalhighmoney = data.highmoney;
+        this.pokertotalhandswon = data.handswon;
+        this.pokertotalhandsplayed = data.handsplayed;
+        this.totalroyalflush = data.royalflush;
+        this.totalstraightflush = data.straightflush;
+        this.totalfourkind = data.fourkind;
+        this.totalfullhouse = data.fullhouse;
+        this.totalflush = data.flush;
+        this.totalstraight = data.straight;
+        this.totalthreekind = data.threekind;
     })
   }
 

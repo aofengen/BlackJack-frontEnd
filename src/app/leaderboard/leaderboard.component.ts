@@ -11,8 +11,11 @@ export class LeaderboardComponent implements OnInit {
   constructor(private as: AuthService) { }
 
   showPokerLeaderboard = false;
+  showPage2 = false
 
-  leaderboard = [];
+  blackjackLeaderboard = [];
+  pokerLeaderboard = [];
+
 
   ngOnInit() {
     this.getBlackjackLeaderboard();
@@ -31,11 +34,12 @@ export class LeaderboardComponent implements OnInit {
         return response.json();
     })
     .then((data) => {
-        this.leaderboard = data;
+        this.blackjackLeaderboard = data;
     });
   }
 
   getVideoPokerLeaderboard() {
+    // let id = this.as.getUserIdNumber();
     let id = 1;
     fetch(/*`https://blackjack-java-api.herokuapp.com/poker/leaderboard`*/ `http://localhost:8080/poker/leaderboard`, {
         method: 'GET',
@@ -48,11 +52,16 @@ export class LeaderboardComponent implements OnInit {
     })
     .then((data) => {
         console.log(data);
+        this.pokerLeaderboard = data;
     })
   }
 
   showPoker() {
     this.showPokerLeaderboard = !this.showPokerLeaderboard;
+  }
+
+  showStats2() {
+      this.showPage2 = !this.showPage2;
   }
 
 }
