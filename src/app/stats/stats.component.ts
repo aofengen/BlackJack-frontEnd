@@ -72,7 +72,7 @@ export class StatsComponent implements OnInit {
   getBlackjackStats() {
     let id = this.as.getUserIdNumber();
     console.log(id);
-    fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
+    fetch(`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`/* `http://localhost:8080/blackjack/stats/${id}`*/, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"
@@ -97,7 +97,7 @@ export class StatsComponent implements OnInit {
 
   getVideoPokerStats() {
     let id = this.as.getUserIdNumber();
-    fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+    fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`/* `http://localhost:8080/poker/stats/${id}`*/, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'

@@ -29,7 +29,7 @@ export class AuthService {
                 password: password
           }
 
-        fetch(/*'https://blackjack-java-api.herokuapp.com/signup'/*/ 'http://localhost:8080/signup', {
+        fetch('https://blackjack-java-api.herokuapp.com/signup' /*'http://localhost:8080/signup'*/, {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -56,7 +56,7 @@ export class AuthService {
 
     loginUser(email:string, password: string) {
         let userData = {email: email, password: password}
-		fetch(/*'https://blackjack-java-api.herokuapp.com/login'*/ 'http://localhost:8080/login', {
+		fetch('https://blackjack-java-api.herokuapp.com/login' /*'http://localhost:8080/login'*/, {
             method: "POST",
             headers: new Headers ({
                 'Content-Type': "application/json"
@@ -93,7 +93,7 @@ export class AuthService {
             id: this.userIdNumber,
             token: localStorage.getItem("token")
         }
-        fetch(/*'https://blackjack-java-api.herokuapp.com/changeInfo'*/ 'http://localhost:8080/changeInfo', {
+        fetch('https://blackjack-java-api.herokuapp.com/changeInfo' /*'http://localhost:8080/changeInfo'*/, {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ export class AuthService {
             id: this.userIdNumber,
             token: localStorage.getItem("token")
         }
-        fetch(/*'https://blackjack-java-api.herokuapp.com/changePass'*/ 'http://localhost:8080/changePassword', {
+        fetch('https://blackjack-java-api.herokuapp.com/changePass' /*'http://localhost:8080/changePassword'*/, {
             method: "POST",
             headers: new Headers({
                 'Content-Type': 'application/json'

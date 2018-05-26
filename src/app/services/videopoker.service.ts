@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 export class VideopokerService {
 
     getMainDeck() {
-        let x = []
-        fetch(/*'https://blackjack-java-api.herokuapp.com/poker/shuffle'*/ 'http://localhost:8080/poker/shuffle', {
+        let x = [];
+        fetch('https://blackjack-java-api.herokuapp.com/poker/shuffle'/* 'http://localhost:8080/poker/shuffle'*/, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export class VideopokerService {
     dealCards(p, d) {
         for (let i = 0; i < 5; i++) {
             p.hand.push(d[0]);
-            d.shift();
+			d.push(d.shift());
         }
     }
 
@@ -37,7 +37,7 @@ export class VideopokerService {
         while(i > 0) {
             if (a.includes(i)) {
                 p.hand.splice(i-1, 1, d[0]);
-                d.shift();
+                d.push(d.shift());
             }
             i--;
         }
@@ -58,9 +58,7 @@ export class VideopokerService {
 		let flush = this.checkFlush(suits);
 		let straight = this.checkStraight(cards);
 		let pair = this.checkPair(values);
-		
-		console.log("flush: " + flush + ", straight: " + straight + ", pair: " + pair);
-		
+				
 		if (flush == true) {
 			if (straight == true) {
 				if (cards.includes(14)) {
@@ -117,7 +115,6 @@ export class VideopokerService {
 		}
 		
 		while (numbers.includes(1)) {
-			console.log("testing ace");
 			if (numbers.includes(2) && numbers.includes(3) && numbers.includes(4) && numbers.includes(5)) {
 				break;
 			} else {
@@ -192,7 +189,7 @@ export class VideopokerService {
             threeKind: 1
         };
         let id = 1;
-        fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+        fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`/* `http://localhost:8080/poker/stats/${id}`*/, {
             method: "POST",
             headers: new Headers({
                 "Content-type": "application/json"
