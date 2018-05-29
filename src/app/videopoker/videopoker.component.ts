@@ -140,27 +140,27 @@ export class VideopokerComponent implements OnInit {
     switch(result) {
       case "Royal Flush":
         this.poker.royalFlush++;
-        this.poker.totalMoney += pBet * 250;
+        this.poker.totalMoney += pBet * 249;
 				pMoney += pBet * 250;
 				break;
       case "Straight Flush": 
         this.poker.straightFlush++;
-        this.poker.totalMoney += pBet * 100;
+        this.poker.totalMoney += pBet * 99;
 				pMoney += pBet * 100;
 				break;
       case "Four of a Kind":
         this.poker.fourKind++;
-        this.poker.totalMoney += pBet * 40;
+        this.poker.totalMoney += pBet * 39;
 				pMoney += pBet * 40;
 				break;
       case "Full House":
         this.poker.fullHouse++;
-        this.poker.totalMoney += pBet * 15;
+        this.poker.totalMoney += pBet * 14;
 				pMoney += pBet * 15;
 				break;
       case "Flush":
         this.poker.flush++
-        this.poker.totalMoney += pBet * 8;
+        this.poker.totalMoney += pBet * 7;
 				pMoney += pBet * 8;
 				break;
       case "Straight":

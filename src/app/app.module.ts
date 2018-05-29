@@ -8,7 +8,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
+import { BlackjackHomeComponent } from './blackjackhome/blackjackhome.component';
 import { BlackjackComponent } from './blackjack/blackjack.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
@@ -25,13 +25,15 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { VideopokerService } from './services/videopoker.service';
 import * as $ from 'jquery';
+import { VideopokerHomeComponent } from './videopokerhome/videopokerhome.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
+    BlackjackHomeComponent,
     BlackjackComponent,
     ProfileComponent,
     LeaderboardComponent,
@@ -41,7 +43,9 @@ import * as $ from 'jquery';
     ConfirmpassModalComponent,
     ChangepassModalComponent,
     StatsComponent,
-    VideopokerComponent
+    VideopokerComponent,
+    VideopokerHomeComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

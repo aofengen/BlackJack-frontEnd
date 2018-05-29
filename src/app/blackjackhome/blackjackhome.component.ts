@@ -4,20 +4,16 @@ import { AuthService } from '../services/auth.service';;
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './blackjackhome.component.html',
+  styleUrls: ['./blackjackhome.component.css']
 })
-export class HomeComponent implements OnInit {
+export class BlackjackHomeComponent implements OnInit {
 
   constructor(private as: AuthService, private router: Router) { }
 
   goToPoker = false;
 
   ngOnInit() { }
-
-  showPoker() {
-    this.goToPoker = !this.goToPoker;
-  }
 
   pageChecked(x) {
     this.as.pageClicked(x);
