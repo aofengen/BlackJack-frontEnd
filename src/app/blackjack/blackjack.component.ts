@@ -11,11 +11,14 @@ export class BlackjackComponent implements OnInit {
 
 
   constructor(public gs: BlackjackService) { }
-  sessionHandsPlayed: number;
-  sessionHandsWon: number;
-  sessionHighMoney: number;
-  sessionBlackjacks: number;
-  sessionTotalMoney: number;
+  
+  blackjack: {
+    handsPlayed: number,
+    handsWon: number,
+    highMoney: number,
+    blackjacks: number,
+    totalMoney: number,
+  }
 
   card1 = {
     bet: 0,
@@ -100,28 +103,19 @@ export class BlackjackComponent implements OnInit {
   outOfMoney = false;
 
   ngOnInit() {
-    if (Number(localStorage.getItem("money")) > 0) {
-      this.playerMoney = Number(localStorage.getItem("money"));
-      this.sessionHandsWon = Number(localStorage.getItem("handsWon"));
-      this.sessionHandsPlayed = Number(localStorage.getItem("handsPlayed"));
-      this.sessionBlackjacks = Number(localStorage.getItem("blackjacks"));
-      this.sessionHighMoney = Number(localStorage.getItem("highMoney")); 
-      this.sessionTotalMoney = Number(localStorage.getItem("totalMoney"));     
-
+    if (localStorage.getItem("blackjack")) {
+      this.blackjack = JSON.parse(localStorage.getItem("blackjack"));
+      this.playerMoney = this.blackjack.totalMoney;
     } else {
-      this.playerMoney = 100.00;
-      this.sessionHandsWon = 0;
-      this.sessionHandsPlayed = 0;
-      this.sessionBlackjacks = 0;
-      this.sessionHighMoney = this.playerMoney;   
-      this.sessionTotalMoney = 0;   
-      
-      localStorage.setItem("money", this.playerMoney.toString());
-      localStorage.setItem("handsWon", this.sessionHandsWon.toString());
-      localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
-      localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
-      localStorage.setItem("highMoney", this.sessionHighMoney.toString());
-      localStorage.setItem("totalMoney", this.sessionTotalMoney.toString());
+      this.blackjack = {
+        handsWon: 0,
+        handsPlayed: 0,
+        highMoney: 0,
+        totalMoney: 100,
+        blackjacks: 0
+      }
+      this.playerMoney = this.blackjack.totalMoney;
+      localStorage.setItem("blackjack", JSON.stringify(this.blackjack));
     }
     
     this.shoe = this.gs.getMainDeck();
@@ -312,13 +306,13 @@ export class BlackjackComponent implements OnInit {
               p[i].result = "BLACKJACK!!!";
               this.stats("blackjack");
               this.playerMoney += p[i].bet * 1.5;
-              this.sessionTotalMoney += p[i].bet * 1.5;
+              this.blackjack.totalMoney += p[i].bet * 1.5;
               break;
             case "Winner!!!":
               p[i].result = "You Win!";
               this.stats("win");
               this.playerMoney += p[i].bet;
-              this.sessionTotalMoney += p[i].bet;
+              this.blackjack.totalMoney += p[i].bet;
               break;
             case "Push!":
               p[i].result = "Push.";
@@ -338,7 +332,6 @@ export class BlackjackComponent implements OnInit {
     if (this.playerMoney < 1) {
       this.updateStats();
       this.gs.saveStats();
-      localStorage.setItem("statsSaved", "yes");
       this.outOfMoney = true;
     } else {
       this.handOver = true;
@@ -352,29 +345,25 @@ export class BlackjackComponent implements OnInit {
   stats(result: string) {
     switch (result) {
       case "blackjack":
-        this.sessionBlackjacks += 1;
-        this.sessionHandsWon += 1;
-        this.sessionHandsPlayed += 1;
+        this.blackjack.blackjacks += 1;
+        this.blackjack.handsWon += 1;
+        this.blackjack.handsPlayed += 1;
         break;
       case "win":
-        this.sessionHandsWon += 1;
-        this.sessionHandsPlayed += 1;
+        this.blackjack.handsWon += 1;
+        this.blackjack.handsPlayed += 1;
         break;
       case "not win":
-        this.sessionHandsPlayed += 1;
+        this.blackjack.handsPlayed += 1;
         break;
       default:
-        this.sessionHandsPlayed += 1;
+        this.blackjack.handsPlayed += 1;
         break;
     }
   }
 
   updateStats() {
-    localStorage.setItem("money", this.playerMoney.toString());
-    localStorage.setItem("handsWon", this.sessionHandsWon.toString());
-    localStorage.setItem("handsPlayed", this.sessionHandsPlayed.toString());
-    localStorage.setItem("blackjacks", this.sessionBlackjacks.toString());
-    localStorage.setItem("totalMoney", this.sessionTotalMoney.toString());
-
+    localStorage.removeItem("blackjack");
+    localStorage.setItem("blackjack", JSON.stringify(this.blackjack));
   }
 }

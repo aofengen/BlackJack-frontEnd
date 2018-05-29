@@ -6,6 +6,7 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../services/auth.service';
 import { BlackjackService } from '../services/blackjack.service';
 import * as $ from 'jquery';
+import { VideopokerService } from '../services/videopoker.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit, AfterContentChecked {
 
-  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private ac: ActivatedRoute, private gs: BlackjackService) { }
+  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private ac: ActivatedRoute, private gs: BlackjackService,
+              private vs: VideopokerService) { }
 
     token: string;
     name: string;
@@ -45,6 +47,9 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
     this.userIdNumber = null;
     if (localStorage.getItem("statsSaved") == "no" && Number(localStorage.getItem("handsPlayed")) > 0) {
       this.gs.saveStats();      
+    }
+    if (localStorage.getItem("poker")) {
+      this.vs.postStats();
     }
     localStorage.clear();
     this.router.navigate(['/']);

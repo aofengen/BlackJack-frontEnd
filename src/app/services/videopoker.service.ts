@@ -5,9 +5,11 @@ import { Injectable } from '@angular/core';
 
 export class VideopokerService {
 
+	constructor(private as: AuthService) {}
+
     getMainDeck() {
         let x = [];
-        fetch('https://blackjack-java-api.herokuapp.com/poker/shuffle'/* 'http://localhost:8080/poker/shuffle'*/, {
+        fetch(/*'https://blackjack-java-api.herokuapp.com/poker/shuffle'*/ 'http://localhost:8080/poker/shuffle', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -27,7 +29,8 @@ export class VideopokerService {
 
     dealCards(p, d) {
         for (let i = 0; i < 5; i++) {
-            p.hand.push(d[0]);
+			p.hand.push(d[0]);
+			p.hand[i].doubleDown = false;
 			d.push(d.shift());
         }
     }
@@ -36,7 +39,8 @@ export class VideopokerService {
         let i = 5;
         while(i > 0) {
             if (a.includes(i)) {
-                p.hand.splice(i-1, 1, d[0]);
+				p.hand.splice(i-1, 1, d[0]);
+				p.hand[i-1].doubleDown = false;
                 d.push(d.shift());
             }
             i--;
@@ -171,36 +175,23 @@ export class VideopokerService {
 	}
 
     postStats() {
-        let userData = {
-            // handsWon: Number(localStorage.getItem("handsWon")),
-            // handsPlayed: Number(localStorage.getItem("handsPlayed")),
-            // highMoney: Number(localStorage.getItem("highMoney")),
-            // totalMoney: Number(localStorage.getItem("totalMoney")),
-            // token: localStorage.getItem("token")
-            handsWon: 2,
-            handsPlayed: 4,
-            highMoney: 200,
-            totalMoney: 200,
-            royalFlush: 0,
-            straightFlush: 0,
-            fourKind: 0,
-            flush: 1,
-            straight: 1,
-            threeKind: 1
-        };
-        let id = 1;
-        fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`/* `http://localhost:8080/poker/stats/${id}`*/, {
-            method: "POST",
-            headers: new Headers({
-                "Content-type": "application/json"
-            }),
-            body: JSON.stringify(userData)
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            console.log(data);
-        });
-    }
+		let id = this.as.getUserIdNumber();
+		let data = JSON.parse(localStorage.getItem("poker"));
+		if (id == undefined || id == NaN || id == null) return;
+		else {
+			fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+				method: "POST",
+				headers: new Headers({
+					"Content-type": "application/json"
+				}),
+				body: JSON.stringify(data)
+			})
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+			});
+		}
+}
 }

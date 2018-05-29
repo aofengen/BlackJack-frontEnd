@@ -12,6 +12,8 @@ import * as $ from 'jquery';
 export class StatsComponent implements OnInit {
 
   showPokerStats = false;
+  blackjack = false;
+  poker = false;
 
   name: string;
   money: number;
@@ -54,25 +56,36 @@ export class StatsComponent implements OnInit {
   totalstraight: number;
   totalthreekind: number;
 
-  constructor(private as: AuthService, private gs: BlackjackService, private vs: VideopokerService) { }
+  constructor(private as: AuthService, private gs: BlackjackService, private vs: VideopokerService) {
+    if (localStorage.getItem("blackjack")) {
+        let blackjack = JSON.parse(localStorage.getItem("blackjack"));
+        this.blackjack = true;
+    }
+    
+    if (localStorage.getItem("poker")) {
+        let poker = JSON.parse(localStorage.getItem("poker"));
+        this.poker = true;
+    } 
+   }
 
   ngOnInit() {
     this.name = this.as.getName();
     this.getBlackjackStats();
     this.getVideoPokerStats();
-    
-    this.money = Number(localStorage.getItem('money'));
-    this.handsWon = Number(localStorage.getItem("handsWon"));
-    this.handsPlayed = Number(localStorage.getItem("handsPlayed"));
-    this.perHandsWon = (this.handsWon/this.handsPlayed) * 100;
-    this.blackjacks = Number(localStorage.getItem("blackjacks"));
-    this.highMoney = Number(localStorage.getItem("highMoney")); 
+
+
+
+    // this.money = Number(localStorage.getItem('money'));
+    // this.handsWon = Number(localStorage.getItem("handsWon"));
+    // this.handsPlayed = Number(localStorage.getItem("handsPlayed"));
+    // this.perHandsWon = (this.handsWon/this.handsPlayed) * 100;
+    // this.blackjacks = Number(localStorage.getItem("blackjacks"));
+    // this.highMoney = Number(localStorage.getItem("highMoney")); 
   }
 
   getBlackjackStats() {
     let id = this.as.getUserIdNumber();
-    console.log(id);
-    fetch(`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`/* `http://localhost:8080/blackjack/stats/${id}`*/, {
+    fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"
@@ -97,7 +110,7 @@ export class StatsComponent implements OnInit {
 
   getVideoPokerStats() {
     let id = this.as.getUserIdNumber();
-    fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`/* `http://localhost:8080/poker/stats/${id}`*/, {
+    fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'

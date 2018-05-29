@@ -5,35 +5,35 @@
   <div class="col-4">
       <h2>{{name}}'s Blackjack Stats - Current Session</h2>
     <table class="table table-dark">
-      <tbody *ngIf="money <= 0 || handsPlayed == 0">
+      <tbody *ngIf="!blackjack">
           <tr>
             <th scope="col">You haven't played any hands yet in this session!</th>
           </tr>
         </tbody>
-      <tbody *ngIf="money > 0 && handsPlayed != 0">
+      <tbody *ngIf="blackjack">
         <tr>
           <th scope="col">Current Money</th>
-          <td scope="col">{{money}}</td>
+          <td scope="col">{{blackjack.totalMoney}}</td>
         </tr>
         <tr>
           <th scope="col">Hands Won</th>
-          <td scope="col">{{handsWon}}</td>
+          <td scope="col">{{blackjack.handsWon}}</td>
         </tr>
         <tr>
           <th scope="col">Hands Played</th>
-          <td scope="col">{{handsPlayed}}</td>
+          <td scope="col">{{blackjack.handsPlayed}}</td>
         </tr>
         <tr>
           <th scope="col">Win %</th>
-          <td scope="col">{{perHandsWon}} %</td>
+          <td scope="col">{{blackjack.handsWon/blackjack.handsPlayed * 100}} %</td>
         </tr>
         <tr>
           <th scope="col">Blackjacks</th>
-          <td scope="col">{{blackjacks}}</td>
+          <td scope="col">{{blackjack.blackjacks}}</td>
         </tr>
         <tr>
           <th scope="col">Highest Dollar Amount</th>
-          <td scope="col">{{highMoney}}</td>
+          <td scope="col">{{blackjack.highMoney}}</td>
         </tr>
       </tbody>
     </table>
@@ -77,59 +77,59 @@
     <div class="col-4">
         <h2>{{name}}'s Video Poker Stats - Current Session</h2>
       <table class="table table-dark">
-        <tbody *ngIf="money <= 0 || handsPlayed == 0">
+        <tbody *ngIf="!poker">
           <tr>
             <th scope="col">You haven't played any hands yet in this session!</th>
           </tr>
         </tbody>
-        <tbody *ngIf="money > 0 && handsPlayed != 0">
+        <tbody *ngIf="poker">
             <tr>
                 <th scope="col">Highest Dollar Amount</th>
-                <td scope="row">{{pokermoney}}</td>
+                <td scope="row">{{poker.totalMoney}}</td>
               </tr>
               <tr>
                 <th scope="col">Hands Won</th>
-                <td scope="row">{{pokerhandswon}}</td>
+                <td scope="row">{{poker.handsWon}}</td>
               </tr>
               <tr>
                 <th scope="col">Hands Played</th>
-                <td scope="row">{{pokerhandsplayed}}</td>
+                <td scope="row">{{poker.handsPlayed}}</td>
               </tr>
               <tr>
                 <th scope="col">Winning Percentage</th>
-                <td scope="row">{{pokerhandswon/pokerhandsplayed * 100}}</td>
+                <td scope="row">{{poker.handsWon/poker.handsPlayed * 100}}</td>
               </tr>
               <tr>
-                <th scope="col">Lifetime Money Won</th>
-                <td scope="row">{{pokermoney}}</td>
+                <th scope="col">Highest Money Amount</th>
+                <td scope="row">{{poker.highMoney}}</td>
               </tr>
               <tr>
                 <th scope="col">Royal Flushes</th>
-                <td scope="row">{{royalflush}}</td>
+                <td scope="row">{{poker.royalFlush}}</td>
               </tr>
               <tr>
                 <th scope="col">Straight Flushes</th>
-                <td scope="row">{{straightflush}}</td>
+                <td scope="row">{{poker.straightFlush}}</td>
               </tr>
               <tr>
                 <th scope="col">Four of a Kind</th>
-                <td scope="row">{{fourkind}}</td>
+                <td scope="row">{{poker.fourKind}}</td>
               </tr>
               <tr>
                   <th scope="col">Full Houses</th>
-                  <td scope="row">{{fullhouse}}</td>
+                  <td scope="row">{{poker.fullHouse}}</td>
               </tr>
               <tr>
                 <th scope="col">Flushes</th>
-                <td scope="row">{{flush}}</td>
+                <td scope="row">{{poker.flush}}</td>
               </tr>
               <tr>
                 <th scope="col">Straights</th>
-                <td scope="row">{{straight}}</td>
+                <td scope="row">{{poker.straight}}</td>
               </tr>
               <tr>
                 <th scope="col">Three of a Kind</th>
-                <td scope="row">{{threekind}}</td>
+                <td scope="row">{{poker.threeKind}}</td>
               </tr>
         </tbody>
       </table>

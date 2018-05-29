@@ -35,8 +35,8 @@ export class BlackjackService {
     }
 
     getMainDeck() {
-        let x = []
-        fetch('https://blackjack-java-api.herokuapp.com/blackjack/shuffle'/* 'http://localhost:8080/blackjack/shuffle'*/, {
+        let x = [];
+        fetch(/*'https://blackjack-java-api.herokuapp.com/blackjack/shuffle'*/ 'http://localhost:8080/blackjack/shuffle', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -192,23 +192,16 @@ export class BlackjackService {
 
     saveStats() {
         let id = this.as.getUserIdNumber();
+        let data = JSON.parse(localStorage.getItem("blackjack"));
         if (id == undefined || id == NaN || id == null) {
             return;
         } else {
-            let userData = {
-                handsWon: Number(localStorage.getItem("handsWon")),
-                handsPlayed: Number(localStorage.getItem("handsPlayed")),
-                blackjacks: Number(localStorage.getItem("blackjacks")),
-                highMoney: Number(localStorage.getItem("highMoney")),
-                totalMoney: Number(localStorage.getItem("totalMoney")),
-                token: localStorage.getItem("token")
-            };
-            fetch(`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`/* `http://localhost:8080/blackjack/stats/${id}`*/, {
+            fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-type": "application/json"
                 }),
-                body: JSON.stringify(userData)
+                body: JSON.stringify(data)
             })
             .then((response) => {
                 return response.json();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { VideopokerService } from '../services/videopoker.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-videopoker',
@@ -9,23 +10,7 @@ import { VideopokerService } from '../services/videopoker.service';
 })
 export class VideopokerComponent implements OnInit {
 
-  constructor(private vs: VideopokerService) {
-    if (Number(localStorage.getItem("pokerhandsplayed")) > 0) return; else {
-    this.poker = {
-      handsPlayed: 0,
-      handsWon: 0,
-      totalMoney: 0,
-      highMoney: 0,
-      royalFlush: 0,
-      straightFlush: 0,
-      fourKind: 0,
-      fullHouse: 0,
-      flush: 0,
-      straight: 0,
-      threeKind: 0
-    }}
-    console.log(this.poker);
-   }
+  constructor(private vs: VideopokerService, private as: AuthService) {}
 
   playerMoney: number;
   playerMoneyAvailable: number;
@@ -60,10 +45,31 @@ export class VideopokerComponent implements OnInit {
 
   ngOnInit() {
     this.dealingDeck = this.vs.getMainDeck();
+    if (localStorage.getItem("poker")) {
+      this.poker = JSON.parse(localStorage.getItem("poker"));
+    } else {
+      let userId = this.as.getUserIdNumber();
+      this.poker = {
+        handsPlayed: 0,
+        handsWon: 0,
+        totalMoney: 0,
+        highMoney: 0,
+        royalFlush: 0,
+        straightFlush: 0,
+        fourKind: 0,
+        fullHouse: 0,
+        flush: 0,
+        straight: 0,
+        threeKind: 0
+      }
+      localStorage.setItem("poker", JSON.stringify(this.poker));
+    }
+    console.log(this.poker);
     if (this.poker.totalMoney > 0) {
       this.playerMoney = this.poker.totalMoney;
     } else {
       this.playerMoney = 50;
+      this.poker.totalMoney = this.playerMoney;
     }
   }
 
@@ -80,10 +86,6 @@ export class VideopokerComponent implements OnInit {
     }
 		return tmpDeck;
 	}
-
-  postStats() {
-    this.vs.postStats();
-  }
 
   getBet(form: NgForm) {
     this.playerMoneyAvailable = this.playerMoney;
@@ -110,9 +112,8 @@ export class VideopokerComponent implements OnInit {
     this.deck.result = "";
     this.tradeCards = [];
     this.handOver = false;
+    this.isPlayerBet = false;
     this.tradingCards = false;
-    console.log(this.poker);
-    this.vs.dealCards(this.deck, this.dealingDeck);
   }
 
   tradeCard(x) {
@@ -139,47 +140,58 @@ export class VideopokerComponent implements OnInit {
     switch(result) {
       case "Royal Flush":
         this.poker.royalFlush++;
+        this.poker.totalMoney += pBet * 250;
 				pMoney += pBet * 250;
 				break;
       case "Straight Flush": 
         this.poker.straightFlush++;
+        this.poker.totalMoney += pBet * 100;
 				pMoney += pBet * 100;
 				break;
       case "Four of a Kind":
         this.poker.fourKind++;
+        this.poker.totalMoney += pBet * 40;
 				pMoney += pBet * 40;
 				break;
       case "Full House":
         this.poker.fullHouse++;
+        this.poker.totalMoney += pBet * 15;
 				pMoney += pBet * 15;
 				break;
       case "Flush":
         this.poker.flush++
+        this.poker.totalMoney += pBet * 8;
 				pMoney += pBet * 8;
 				break;
       case "Straight":
         this.poker.straight++
+        this.poker.totalMoney += pBet * 5;
 				pMoney += pBet * 5;
 				break;
       case "Three of a Kind":
         this.poker.threeKind++;
+        this.poker.totalMoney += pBet * 3;
 				pMoney += pBet * 3;
 				break;
-			case "Two Pair":
+      case "Two Pair":
+        this.poker.totalMoney += pBet;
 				pMoney += pBet;
         break;
       case "nothing...":
+        this.poker.totalMoney -= pBet;
         pMoney -= pBet;
         break;
-			default:
+      default:
+        this.poker.totalMoney = pMoney;
 				break;
     }
     if (result != "nothing...") {
       this.poker.handsWon++;
-      this.poker.totalMoney += pMoney;
       if (pMoney > this.poker.highMoney) this.poker.highMoney = pMoney;
     }
-    localStorage.setItem("pokerhandsplayed", this.poker.handsPlayed.toString());
+    localStorage.removeItem("poker");
+    localStorage.setItem("poker", JSON.stringify(this.poker));
+    console.log(this.poker);
 		return pMoney;
   }
 }
