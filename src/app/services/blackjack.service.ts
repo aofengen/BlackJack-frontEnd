@@ -36,7 +36,7 @@ export class BlackjackService {
 
     getMainDeck() {
         let x = [];
-        fetch(/*'https://blackjack-java-api.herokuapp.com/blackjack/shuffle'*/ 'http://localhost:8080/blackjack/shuffle', {
+        fetch('https://blackjack-java-api.herokuapp.com/blackjack/shuffle' /* 'http://localhost:8080/blackjack/shuffle'*/, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ export class BlackjackService {
         if (id == undefined || id == NaN || id == null) {
             return;
         } else {
-            fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
+            fetch(`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}` /* `http://localhost:8080/blackjack/stats/${id}`*/, {
                 method: "POST",
                 headers: new Headers({
                     "Content-type": "application/json"

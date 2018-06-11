@@ -24,7 +24,7 @@ export class LeaderboardComponent implements OnInit {
 
   getBlackjackLeaderboard() {
     let id = this.as.getUserIdNumber();
-    fetch(/*'https://blackjack-java-api.herokuapp.com/blackjack/leaderboard'*/ 'http://localhost:8080/blackjack/leaderboard', {
+    fetch('https://blackjack-java-api.herokuapp.com/blackjack/leaderboard' /* 'http://localhost:8080/blackjack/leaderboard'*/, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"
@@ -41,7 +41,7 @@ export class LeaderboardComponent implements OnInit {
   getVideoPokerLeaderboard() {
     let id = this.as.getUserIdNumber();
     // let id = 1;
-    fetch(/*`https://blackjack-java-api.herokuapp.com/poker/leaderboard`*/ `http://localhost:8080/poker/leaderboard`, {
+    fetch(`https://blackjack-java-api.herokuapp.com/poker/leaderboard` /* `http://localhost:8080/poker/leaderboard`*/, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'

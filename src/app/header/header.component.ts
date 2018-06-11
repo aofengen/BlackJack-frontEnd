@@ -1,8 +1,5 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SignupModalComponent } from '../signup-modal/signup-modal.component';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
 import { AuthService } from '../services/auth.service';
 import { BlackjackService } from '../services/blackjack.service';
 import * as $ from 'jquery';
@@ -15,7 +12,7 @@ import { VideopokerService } from '../services/videopoker.service';
 })
 export class HeaderComponent implements OnInit, AfterContentChecked {
 
-  constructor(private ms: NgbModal, private as: AuthService, private router: Router, private ac: ActivatedRoute, private gs: BlackjackService,
+  constructor(private as: AuthService, private router: Router, private ac: ActivatedRoute, private gs: BlackjackService,
               private vs: VideopokerService) { }
 
     token: string;
@@ -31,14 +28,6 @@ export class HeaderComponent implements OnInit, AfterContentChecked {
       this.name = this.as.getName();
     }
 
-  }
-
-  signup() {
-    this.ms.open(SignupModalComponent);
-  }
-
-  login() {
-    this.ms.open(LoginModalComponent);
   }
 
   logout() {

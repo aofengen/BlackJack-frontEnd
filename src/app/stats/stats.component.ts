@@ -74,18 +74,11 @@ export class StatsComponent implements OnInit {
     this.getVideoPokerStats();
 
 
-
-    // this.money = Number(localStorage.getItem('money'));
-    // this.handsWon = Number(localStorage.getItem("handsWon"));
-    // this.handsPlayed = Number(localStorage.getItem("handsPlayed"));
-    // this.perHandsWon = (this.handsWon/this.handsPlayed) * 100;
-    // this.blackjacks = Number(localStorage.getItem("blackjacks"));
-    // this.highMoney = Number(localStorage.getItem("highMoney")); 
   }
 
   getBlackjackStats() {
     let id = this.as.getUserIdNumber();
-    fetch(/*`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}`*/ `http://localhost:8080/blackjack/stats/${id}`, {
+    fetch(`https://blackjack-java-api.herokuapp.com/blackjack/stats/${id}` /* `http://localhost:8080/blackjack/stats/${id}`*/, {
         method: "GET",
         headers: new Headers({
             "Content-type": "application/json"
@@ -110,7 +103,7 @@ export class StatsComponent implements OnInit {
 
   getVideoPokerStats() {
     let id = this.as.getUserIdNumber();
-    fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+    fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}` /* `http://localhost:8080/poker/stats/${id}`*/, {
         method: 'GET',
         headers: new Headers({
             'Content-Type': 'application/json'

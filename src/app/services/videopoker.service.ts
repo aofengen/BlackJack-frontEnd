@@ -9,7 +9,7 @@ export class VideopokerService {
 
     getMainDeck() {
         let x = [];
-        fetch(/*'https://blackjack-java-api.herokuapp.com/poker/shuffle'*/ 'http://localhost:8080/poker/shuffle', {
+        fetch('https://blackjack-java-api.herokuapp.com/poker/shuffle' /* 'http://localhost:8080/poker/shuffle'*/, {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ export class VideopokerService {
 		let data = JSON.parse(localStorage.getItem("poker"));
 		if (id == undefined || id == NaN || id == null) return;
 		else {
-			fetch(/*`https://blackjack-java-api.herokuapp.com/poker/stats/${id}`*/ `http://localhost:8080/poker/stats/${id}`, {
+			fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}` /* `http://localhost:8080/poker/stats/${id}`*/, {
 				method: "POST",
 				headers: new Headers({
 					"Content-type": "application/json"

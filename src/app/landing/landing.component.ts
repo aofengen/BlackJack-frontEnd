@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignupModalComponent } from '../signup-modal/signup-modal.component';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ms: NgbModal) { }
 
   ngOnInit() {
+  }
+
+  signup() {
+    this.ms.open(SignupModalComponent);
+  }
+
+  login() {
+    this.ms.open(LoginModalComponent);
   }
 
 }

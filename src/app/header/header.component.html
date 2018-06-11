@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="this.as.token">
   <br>
   <div class="container-fluid">
     <h2 *ngIf="name">Hello, {{name}}</h2>
@@ -9,8 +9,6 @@
           <li class="nav-item li2" id="pokerLink" (click)="pageClicked('pokerLink')" routerLink="/poker" *ngIf="this.as.token">Video Poker</li>
           <li class="nav-item li1" id="homeLink" (click)="pageClicked('homeLink')" routerLink="/">Home</li>
           <li class="nav-item li2" id="leaderboardLink" (click)="pageClicked('leaderboardLink')" routerLink="/leaderboard">High Scores!</li>
-          <li class="nav-item li3" (click)="signup()" *ngIf="!this.as.token">Sign Up</li>
-          <li class="nav-item li1" (click)="login()" *ngIf="!this.as.token">Login</li>
           <li class="nav-item li3" id="profileLink" (click)="pageClicked('profileLink')" routerLink="/profile/{{userIdNumber}}" *ngIf="this.as.token">My Profile</li>
           <li class="nav-item li1" id="statsLink" (click)="pageClicked('statsLink')" routerLink="/stats/{{userIdNumber}}" *ngIf="this.as.token">Stats</li>
           <li class="nav-item li1" (click)="logout()" *ngIf="this.as.token">Logout</li>
@@ -18,6 +16,6 @@
       </div>
     </div>
   </div>
+  <br>
+  <hr>
 </nav>
-<br>
-<hr>
