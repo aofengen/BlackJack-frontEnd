@@ -13,7 +13,7 @@ import { StatsComponent } from './stats/stats.component';
 
 export const routes = [
     { path: '', component: LandingComponent },
-    { path: 'leaderboard', component: LeaderboardComponent },
+    { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] },
     { path: 'blackjack', component: BlackjackHomeComponent, canActivate: [AuthGuard] },
     { path: 'blackjack/game', component: BlackjackComponent, canActivate: [AuthGuard] },
     { path: 'poker', component: VideopokerHomeComponent, canActivate: [AuthGuard] },

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupModalComponent } from '../signup-modal/signup-modal.component';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,9 +11,10 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
 })
 export class LandingComponent implements OnInit {
 
-  constructor(private ms: NgbModal) { }
+  constructor(private ms: NgbModal, private as: AuthService) { }
 
   ngOnInit() {
+    this.reload();
   }
 
   signup() {
@@ -21,6 +23,11 @@ export class LandingComponent implements OnInit {
 
   login() {
     this.ms.open(LoginModalComponent);
+  }
+
+  reload() {
+    this.as.token = null;
+    localStorage.clear();
   }
 
 }

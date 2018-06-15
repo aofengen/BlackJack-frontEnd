@@ -7,7 +7,7 @@
         <ul class="nav">
           <li class="nav-item li2" id="blackjackLink" (click)="pageClicked('blackjackLink')" routerLink="/blackjack" *ngIf="this.as.token && !active">Blackjack</li>
           <li class="nav-item li2" id="pokerLink" (click)="pageClicked('pokerLink')" routerLink="/poker" *ngIf="this.as.token">Video Poker</li>
-          <li class="nav-item li1" id="homeLink" (click)="pageClicked('homeLink')" routerLink="/">Home</li>
+          <!-- <li class="nav-item li1" id="homeLink" (click)="pageClicked('homeLink')" routerLink="/">Home</li> -->
           <li class="nav-item li2" id="leaderboardLink" (click)="pageClicked('leaderboardLink')" routerLink="/leaderboard">High Scores!</li>
           <li class="nav-item li3" id="profileLink" (click)="pageClicked('profileLink')" routerLink="/profile/{{userIdNumber}}" *ngIf="this.as.token">My Profile</li>
           <li class="nav-item li1" id="statsLink" (click)="pageClicked('statsLink')" routerLink="/stats/{{userIdNumber}}" *ngIf="this.as.token">Stats</li>
