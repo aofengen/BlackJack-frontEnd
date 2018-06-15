@@ -64,7 +64,6 @@ export class VideopokerComponent implements OnInit {
       }
       localStorage.setItem("poker", JSON.stringify(this.poker));
     }
-    console.log(this.poker);
     if (this.poker.totalMoney > 0) {
       this.playerMoney = this.poker.totalMoney;
     } else {
@@ -191,7 +190,6 @@ export class VideopokerComponent implements OnInit {
     }
     localStorage.removeItem("poker");
     localStorage.setItem("poker", JSON.stringify(this.poker));
-    console.log(this.poker);
 		return pMoney;
   }
 }

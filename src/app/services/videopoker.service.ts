@@ -176,7 +176,8 @@ export class VideopokerService {
 
     postStats() {
 		let id = this.as.getUserIdNumber();
-		let data = JSON.parse(localStorage.getItem("poker"));
+		let data = JSON.parse(localStorage.getItem("poker"))
+		data.totalMoney -= 50;
 		if (id == undefined || id == NaN || id == null) return;
 		else {
 			fetch(`https://blackjack-java-api.herokuapp.com/poker/stats/${id}` /* `http://localhost:8080/poker/stats/${id}`*/, {

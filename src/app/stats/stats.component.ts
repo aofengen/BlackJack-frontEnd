@@ -15,6 +15,9 @@ export class StatsComponent implements OnInit {
   blackjack = false;
   poker = false;
 
+  currentBlackjack: object;
+  currentPoker: object;
+
   name: string;
   money: number;
   handsWon: number;
@@ -58,12 +61,12 @@ export class StatsComponent implements OnInit {
 
   constructor(private as: AuthService, private gs: BlackjackService, private vs: VideopokerService) {
     if (localStorage.getItem("blackjack")) {
-        let blackjack = JSON.parse(localStorage.getItem("blackjack"));
+        this.currentBlackjack = JSON.parse(localStorage.getItem("blackjack"));
         this.blackjack = true;
     }
     
     if (localStorage.getItem("poker")) {
-        let poker = JSON.parse(localStorage.getItem("poker"));
+        this.currentPoker = JSON.parse(localStorage.getItem("poker"));
         this.poker = true;
     } 
    }
