@@ -13,7 +13,11 @@ export class BlackjackHomeComponent implements OnInit {
 
   goToPoker = false;
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if (localStorage.getItem('blackjack') != null) {
+      this.router.navigate['/blackjack/game'];
+    }
+  }
 
   pageChecked(x) {
     this.as.pageClicked(x);

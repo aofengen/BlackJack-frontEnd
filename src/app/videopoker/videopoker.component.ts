@@ -12,6 +12,9 @@ export class VideopokerComponent implements OnInit {
 
   constructor(private vs: VideopokerService, private as: AuthService) {}
 
+  game = "poker";
+  // bsclass = "row justify-content-between";
+
   playerMoney: number;
   playerMoneyAvailable: number;
   playerBet: number;

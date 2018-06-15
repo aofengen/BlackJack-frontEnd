@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-videopokerhome',
@@ -8,9 +9,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class VideopokerHomeComponent implements OnInit {
 
-  constructor(private as: AuthService) { }
+  constructor(private as: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem("poker") != null) {
+      this.router.navigate['/poker/game'];
+    }
   }
 
   pageChecked(x) {
